@@ -1,11 +1,338 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <title>Lab 1</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MealPrep Buddy — ЛР №1</title>
+  <meta name="description" content="ЛР №1: HTML-документ про планування харчування та список покупок (MealPrep Buddy)." />
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <h1>Лабораторна робота №1</h1>
-  <p>GitHub Pages працює ✅</p>
+  <header class="site-header" id="top">
+    <div class="container header-row">
+      <a class="brand" href="#top" aria-label="На початок сторінки">
+        <span class="brand-mark">🍲</span>
+        <span class="brand-text">MealPrep Buddy</span>
+      </a>
+
+      <nav class="nav" aria-label="Основна навігація">
+        <a href="#about">Про застосунок</a>
+        <a href="#planner">План тижня</a>
+        <a href="#recipes">Рецепти</a>
+        <a href="#list">Список покупок</a>
+        <a href="#contact">Контакти</a>
+      </nav>
+
+      <button class="btn btn-secondary menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">
+        Меню
+      </button>
+    </div>
+
+    <div class="container mobile-nav" id="mobileNav" hidden>
+      <a href="#about">Про застосунок</a>
+      <a href="#planner">План тижня</a>
+      <a href="#recipes">Рецепти</a>
+      <a href="#list">Список покупок</a>
+      <a href="#contact">Контакти</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Плануй харчування на тиждень — швидко і без стресу</h1>
+          <p class="lead">
+            <strong>MealPrep Buddy</strong> допомагає скласти простий план страв і автоматично зібрати
+            список покупок, щоб економити час і гроші.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#planner">Перейти до плану</a>
+            <a class="btn btn-secondary" href="#list">Сформувати список</a>
+          </div>
+
+          <ul class="hero-bullets">
+            <li>✅ 7 днів: обід + вечеря</li>
+            <li>✅ рецепти з часом приготування</li>
+            <li>✅ список покупок з відмітками</li>
+          </ul>
+        </div>
+
+        <div class="hero-card" role="region" aria-label="Коротко про лабораторну">
+          <h2 class="card-title">Лабораторна робота №1</h2>
+          <p class="muted">
+            HTML-документ + базова стилізація CSS + невелика інтерактивність JS (позначки у списку покупок).
+          </p>
+
+          <div class="mini-grid" aria-label="Дані студента">
+            <div class="mini">
+              <span class="mini-label">Студент</span>
+              <span class="mini-value">Прізвище Імʼя</span>
+            </div>
+            <div class="mini">
+              <span class="mini-label">Група</span>
+              <span class="mini-value">ХХ-2Х</span>
+            </div>
+            <div class="mini">
+              <span class="mini-label">Рік</span>
+              <span class="mini-value">2025</span>
+            </div>
+            <div class="mini">
+              <span class="mini-label">Тема</span>
+              <span class="mini-value">Їжа / планер</span>
+            </div>
+          </div>
+
+          <p class="note">
+            ✍️ Заміни «Прізвище Імʼя» та «ХХ-2Х» на свої дані.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>Про застосунок</h2>
+          <p class="muted">
+            Проблема: планування харчування займає час, а інгредієнти часто забуваються.
+            Рішення: один тижневий план + один автоматичний список покупок.
+          </p>
+        </div>
+
+        <div class="cards-3">
+          <article class="card">
+            <h3>Кому підходить</h3>
+            <ul class="list">
+              <li>студентам і зайнятим людям</li>
+              <li>тим, хто хоче їсти вдома частіше</li>
+              <li>тим, хто хоче менше витрачати на «спонтанні» покупки</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Основний сценарій</h3>
+            <ol class="list">
+              <li>обрати страви на тиждень</li>
+              <li>заповнити планер</li>
+              <li>зібрати інгредієнти в список</li>
+              <li>під час покупок відмічати виконане</li>
+            </ol>
+          </article>
+
+          <article class="card">
+            <h3>Що демонструє ЛР</h3>
+            <ul class="list">
+              <li>семантичну структуру HTML</li>
+              <li>адаптивність (mobile/desktop)</li>
+              <li>просту інтерактивність (JS)</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANNER -->
+    <section class="section alt" id="planner">
+      <div class="container">
+        <div class="section-head">
+          <h2>План харчування на тиждень</h2>
+          <p class="muted">Приклад планера. Можеш змінити страви під себе.</p>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="Таблиця плану харчування" tabindex="0">
+          <table class="planner">
+            <thead>
+              <tr>
+                <th>День</th>
+                <th>Обід</th>
+                <th>Вечеря</th>
+                <th>Час</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Пн</td><td>Салат з тунцем</td><td>Паста з овочами</td><td>25–35 хв</td></tr>
+              <tr><td>Вт</td><td>Гречка + курка</td><td>Овочевий суп</td><td>30–45 хв</td></tr>
+              <tr><td>Ср</td><td>Омлет з сиром</td><td>Рис з овочами</td><td>20–30 хв</td></tr>
+              <tr><td>Чт</td><td>Йогурт + фрукти</td><td>Запечена риба</td><td>15–35 хв</td></tr>
+              <tr><td>Пт</td><td>Сендвіч з індичкою</td><td>Чилі з квасолею</td><td>25–40 хв</td></tr>
+              <tr><td>Сб</td><td>Сирники</td><td>Картопля + салат</td><td>30–45 хв</td></tr>
+              <tr><td>Нд</td><td>Смузі боул</td><td>Кускус + овочі</td><td>20–30 хв</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="tip">
+          Порада: якщо у тебе ЛР тільки про HTML, таблиця + списки + форми вже виглядають «по-лабораторному» 😄
+        </p>
+      </div>
+    </section>
+
+    <!-- RECIPES -->
+    <section class="section" id="recipes">
+      <div class="container">
+        <div class="section-head">
+          <h2>Швидкі рецепти</h2>
+          <p class="muted">Короткі картки з інгредієнтами. Для ЛР достатньо 3–4.</p>
+        </div>
+
+        <div class="cards-3">
+          <article class="card recipe">
+            <h3>Салат з тунцем (10 хв)</h3>
+            <p class="muted">Легкий обід без готування.</p>
+            <h4>Інгредієнти</h4>
+            <ul class="list">
+              <li>тунець (консерва)</li>
+              <li>листя салату</li>
+              <li>огірок, помідор</li>
+              <li>оливкова олія, сіль</li>
+            </ul>
+          </article>
+
+          <article class="card recipe">
+            <h3>Паста з овочами (25 хв)</h3>
+            <p class="muted">Бюджетна вечеря.</p>
+            <h4>Інгредієнти</h4>
+            <ul class="list">
+              <li>паста</li>
+              <li>болгарський перець</li>
+              <li>цибуля, часник</li>
+              <li>томатний соус</li>
+            </ul>
+          </article>
+
+          <article class="card recipe">
+            <h3>Омлет з сиром (15 хв)</h3>
+            <p class="muted">Ситно і швидко.</p>
+            <h4>Інгредієнти</h4>
+            <ul class="list">
+              <li>яйця</li>
+              <li>твердий сир</li>
+              <li>зелень</li>
+              <li>сіль, перець</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- GROCERY LIST -->
+    <section class="section alt" id="list">
+      <div class="container">
+        <div class="section-head">
+          <h2>Список покупок</h2>
+          <p class="muted">
+            Відмічай куплене — прогрес збережеться у браузері (localStorage).
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Категорії</h3>
+
+            <div class="checklist" role="group" aria-label="Список покупок">
+              <h4>Овочі та фрукти</h4>
+              <label><input type="checkbox" class="item" data-key="tomato"> Помідори</label>
+              <label><input type="checkbox" class="item" data-key="cucumber"> Огірки</label>
+              <label><input type="checkbox" class="item" data-key="pepper"> Перець</label>
+              <label><input type="checkbox" class="item" data-key="greens"> Зелень</label>
+
+              <h4>Молочне</h4>
+              <label><input type="checkbox" class="item" data-key="cheese"> Сир</label>
+              <label><input type="checkbox" class="item" data-key="yogurt"> Йогурт</label>
+
+              <h4>Бакалія</h4>
+              <label><input type="checkbox" class="item" data-key="pasta"> Паста</label>
+              <label><input type="checkbox" class="item" data-key="rice"> Рис / кускус</label>
+              <label><input type="checkbox" class="item" data-key="beans"> Квасоля</label>
+
+              <h4>Інше</h4>
+              <label><input type="checkbox" class="item" data-key="tuna"> Тунець (консерва)</label>
+              <label><input type="checkbox" class="item" data-key="oil"> Оливкова олія</label>
+            </div>
+
+            <div class="actions">
+              <button class="btn btn-secondary" type="button" id="resetBtn">Скинути відмітки</button>
+            </div>
+          </div>
+
+          <aside class="card">
+            <h3>Нотатки</h3>
+            <p class="muted">Можеш додати свої позиції (без збереження — чисто для ЛР).</p>
+
+            <form id="noteForm">
+              <label for="noteInput" class="sr-only">Додати позицію</label>
+              <div class="note-row">
+                <input id="noteInput" type="text" placeholder="Напр.: вівсянка, банани, курка…" maxlength="60" />
+                <button class="btn btn-primary" type="submit">Додати</button>
+              </div>
+            </form>
+
+            <ul id="notes" class="notes" aria-label="Додані позиції"></ul>
+
+            <p class="tip small">
+              Для GitHub Pages достатньо, щоб <code>index.html</code> був у корені репозиторію.
+            </p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-head">
+          <h2>Контакти</h2>
+          <p class="muted">Форма (демо). Дані не відправляються — лише приклад HTML-форм.</p>
+        </div>
+
+        <div class="grid-2">
+          <form class="card form" action="#" method="post">
+            <div class="field">
+              <label for="name">Імʼя</label>
+              <input id="name" name="name" type="text" placeholder="Ваше імʼя" required />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="name@example.com" required />
+            </div>
+
+            <div class="field">
+              <label for="msg">Повідомлення</label>
+              <textarea id="msg" name="msg" rows="5" placeholder="Текст повідомлення..."></textarea>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Надіслати</button>
+            <p class="muted small">* Для ЛР форма може бути без реальної відправки.</p>
+          </form>
+
+          <div class="card">
+            <h3>Вимоги (коротко)</h3>
+            <ul class="list">
+              <li><strong>Функціональні:</strong> план тижня, рецепти, список покупок.</li>
+              <li><strong>Нефункціональні:</strong> адаптивність, читабельність, доступність.</li>
+              <li><strong>GitHub Pages:</strong> main → /(root), файл <code>index.html</code> у корені.</li>
+            </ul>
+
+            <a class="btn btn-secondary" href="#top">↑ На початок</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© 2025 MealPrep Buddy — ЛР №1</span>
+      <span class="muted">HTML • CSS • JS</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
