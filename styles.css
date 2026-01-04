@@ -91,11 +91,8 @@ a:hover{ text-decoration:underline; }
 .hero{
   padding:46px 0 18px 0;
 }
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.15fr .85fr;
-  gap:18px;
-  align-items:stretch;
+.hero-grid {
+  align-items: center;
 }
 .hero-image img {
   width: 100%;
