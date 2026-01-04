@@ -3,29 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MealPrep Buddy — Планер харчування</title>
-  <meta name="description" content="План харчування на тиждень → автоматичні інгредієнти → список покупок з відмітками + підготовка email." />
+  <title>MealPrep Buddy — Планер + Список покупок</title>
+  <meta name="description" content="План харчування на тиждень → інгредієнти → відмітки 'вже є' → список покупок → email (mailto)." />
 
   <style>
     :root{
       --bg:#0b1020;
       --card:#111a33;
-      --card2:#0f1730;
       --text:#e9ecf5;
       --muted:#b7c0dd;
       --accent:#7c5cff;
-      --accent2:#2dd4bf;
       --line:rgba(255,255,255,.12);
       --shadow: 0 18px 50px rgba(0,0,0,.35);
       --radius:16px;
     }
-
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: radial-gradient(1100px 600px at 20% 10%, rgba(124,92,255,.25), transparent 55%),
-                  radial-gradient(900px 500px at 80% 15%, rgba(45,212,191,.18), transparent 55%),
+                  radial-gradient(900px 500px at 80% 15%, rgba(124,92,255,.12), transparent 55%),
                   var(--bg);
       color:var(--text);
       line-height:1.5;
@@ -38,44 +35,28 @@
       padding:8px 12px;border:1px solid var(--line);border-radius:999px;
       background:rgba(255,255,255,.03)
     }
-
-    /* Header */
     .site-header{
       position:sticky;top:0;z-index:50;
       backdrop-filter: blur(12px);
       background: rgba(11,16,32,.7);
       border-bottom:1px solid var(--line);
     }
-    .header-row{
-      display:flex;align-items:center;justify-content:space-between;gap:16px;
-      padding:14px 0;
-    }
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;}
     .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
     .brand-mark{font-size:22px}
     .brand-text{font-weight:700;letter-spacing:.2px}
-
-    .nav{
-      display:flex;align-items:center;gap:14px;flex-wrap:wrap;
-    }
+    .nav{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
     .nav a{
-      text-decoration:none;
-      padding:8px 10px;border-radius:10px;
-      color:var(--muted);
+      text-decoration:none;padding:8px 10px;border-radius:10px;color:var(--muted);
     }
     .nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
     .menu-btn{display:none}
+    @media (max-width: 820px){ .nav{display:none} .menu-btn{display:inline-flex} }
 
-    @media (max-width: 820px){
-      .nav{display:none}
-      .menu-btn{display:inline-flex}
-    }
-
-    /* Buttons */
     .btn{
       appearance:none;border:0;cursor:pointer;
       padding:10px 14px;border-radius:12px;
-      font-weight:600;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      font-weight:600;display:inline-flex;align-items:center;justify-content:center;gap:8px;
       transition: transform .05s ease, background .15s ease, border-color .15s ease;
       text-decoration:none;
     }
@@ -91,32 +72,19 @@
       color:var(--text);
     }
 
-    /* Mobile nav */
-    .mobile-nav{
-      display:none;
-      border-top:1px solid var(--line);
-      padding:10px 0 14px;
-    }
-    .mobile-nav a{
-      display:block;text-decoration:none;color:var(--muted);
-      padding:10px 6px;border-radius:10px;
-    }
+    .mobile-nav{display:none;border-top:1px solid var(--line);padding:10px 0 14px;}
+    .mobile-nav a{display:block;text-decoration:none;color:var(--muted);padding:10px 6px;border-radius:10px;}
     .mobile-nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
     .mobile-nav[hidden]{display:none}
-    @media (max-width:820px){
-      .mobile-nav{display:block}
-    }
+    @media (max-width:820px){ .mobile-nav{display:block} }
 
-    /* Sections */
     section{padding:46px 0}
-    .section-head{
-      display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;
-      margin-bottom:18px;
-    }
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:18px;}
     h1,h2,h3{margin:0 0 10px}
     h1{font-size: clamp(28px, 3vw, 40px);line-height:1.12}
     h2{font-size: clamp(22px, 2.2vw, 28px)}
     h3{font-size: 18px}
+
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border:1px solid var(--line);
@@ -125,21 +93,13 @@
       padding:16px;
     }
 
-    /* Hero */
     .hero{padding-top:32px}
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap:26px;
-      align-items:center;
-    }
+    .hero-grid{display:grid;grid-template-columns: 1.1fr 0.9fr;gap:26px;align-items:center;}
     .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
     .hero-bullets{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px}
     .hero-bullets li{color:var(--muted)}
     .hero-image img{
-      width:100%;
-      height:420px;
-      object-fit:cover;
+      width:100%;height:420px;object-fit:cover;
       border-radius: var(--radius);
       border:1px solid var(--line);
       box-shadow: var(--shadow);
@@ -150,82 +110,52 @@
       .hero-image img{height:260px}
     }
 
-    /* Grid helpers */
     .grid-2{display:grid;grid-template-columns: 1fr 1fr;gap:16px}
     @media (max-width: 900px){.grid-2{grid-template-columns:1fr}}
 
     .list{margin:8px 0 0;padding-left:18px;color:var(--muted)}
     .kbd{
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      padding:2px 6px;
-      border-radius:8px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
+      font-size: 12px;padding:2px 6px;border-radius:8px;border:1px solid var(--line);
+      background:rgba(255,255,255,.05);color:var(--text);
     }
 
-    /* Planner */
-    .planner-grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
+    .planner-grid{display:grid;gap:12px}
     .planner-row{
       display:grid;
       grid-template-columns: 90px 1fr 1fr;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius:14px;
+      gap:10px;align-items:center;
+      padding:10px 12px;border:1px solid var(--line);border-radius:14px;
       background: rgba(0,0,0,.12);
     }
-    .day{font-weight:700;color:var(--text)}
+    .day{font-weight:700}
     select{
       width:100%;
-      padding:10px 10px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      color:var(--text);
-      outline:none;
+      padding:10px 10px;border-radius:12px;border:1px solid var(--line);
+      background: rgba(255,255,255,.04);color:var(--text);outline:none;
     }
     option{color:#0b1020}
-    .planner-note{margin-top:10px;color:var(--muted)}
 
-    /* Shopping list */
-    .checklist{
-      display:grid;
-      gap:10px;
-      margin-top:10px;
-    }
+    .checklist{display:grid;gap:10px;margin-top:10px;}
     .item{
       display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:10px 12px;
-      border:1px solid var(--line);
-      border-radius:14px;
+      padding:10px 12px;border:1px solid var(--line);border-radius:14px;
       background: rgba(0,0,0,.12);
     }
     .item label{display:flex;align-items:center;gap:10px;cursor:pointer}
     .item input{transform: scale(1.15)}
     .tag{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid var(--line);
-      padding:3px 8px;
-      border-radius:999px;
-      background: rgba(255,255,255,.04);
-      white-space:nowrap;
+      font-size:12px;color:var(--muted);
+      border:1px solid var(--line);padding:3px 8px;border-radius:999px;
+      background: rgba(255,255,255,.04);white-space:nowrap;
     }
     .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
     .small{font-size:13px}
-    .footer{
-      padding:22px 0;
-      border-top:1px solid var(--line);
-      color:var(--muted);
-    }
+
+    .footer{padding:22px 0;border-top:1px solid var(--line);color:var(--muted);}
     .footer-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    .split-note{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
   </style>
 </head>
 
@@ -265,29 +195,28 @@
           <div class="pill"><span>ЛР №1</span><span class="muted">HTML • CSS • JS</span></div>
           <h1>Плануй харчування на тиждень — швидко і без стресу</h1>
           <p class="muted">
-            Обирай страви на кожен день — і сайт автоматично згенерує <strong>інгредієнти</strong> та
-            <strong>список покупок</strong> з відмітками. Можна сформувати email через <span class="kbd">mailto:</span>.
+            Обери страви на кожен день — і сайт згенерує <strong>повний тижневий список інгредієнтів</strong>.
+            Відмічай, що <strong>вже є вдома</strong> — решта сформується у <strong>список покупок</strong> і підготується до відправки на пошту через <span class="kbd">mailto:</span>.
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#planner">Перейти до плану</a>
-            <a class="btn btn-secondary" href="#shopping">Зібрати список</a>
+            <a class="btn btn-secondary" href="#shopping">Переглянути список</a>
           </div>
 
           <ul class="hero-bullets">
-            <li>✅ План: 7 днів (обід + вечеря)</li>
-            <li>✅ Автоматичний список інгредієнтів</li>
-            <li>✅ Відмітки збережуться в браузері</li>
+            <li>✅ 7 днів (обід + вечеря)</li>
+            <li>✅ Інгредієнти на цілий тиждень</li>
+            <li>✅ Відмітки «вже є» → автоматичний список покупок</li>
           </ul>
 
           <p class="muted small" style="margin-top:10px">
-            📌 Щоб фото відображалось на GitHub Pages, додай файл у репозиторій: <span class="kbd">images/mealprep-hero.jpg</span>
+            📌 Додай фото у репозиторій: <span class="kbd">images/mealprep-hero.jpg</span>
           </p>
         </div>
 
-        <!-- PHOTO (right side) -->
+        <!-- PHOTO -->
         <div class="hero-image">
-          <!-- Put your image in repo folder: /images/mealprep-hero.jpg -->
           <img src="images/mealprep-hero.jpg" alt="Приклад планування харчування на тиждень" />
         </div>
       </div>
@@ -299,28 +228,31 @@
         <div class="section-head">
           <div>
             <h2>Про застосунок</h2>
-            <p class="muted">Проблема: планування займає час, а інгредієнти часто забуваються. Рішення: план → список.</p>
+            <p class="muted">
+              Ідея: замість окремого списку для кожної страви — один спільний список на тиждень.
+              Ти відмічаєш, що вже є вдома, а система показує лише те, що потрібно купити.
+            </p>
           </div>
-          <div class="pill"><span>Адаптивний дизайн</span><span class="muted">mobile/desktop</span></div>
+          <div class="pill"><span>Адаптивно</span><span class="muted">mobile/desktop</span></div>
         </div>
 
         <div class="grid-2">
           <article class="card">
-            <h3>Головний сценарій</h3>
+            <h3>Основний сценарій</h3>
             <ol class="list">
-              <li>Обери страви на кожен день</li>
-              <li>Натисни «Оновити список»</li>
-              <li>Позначай куплене</li>
-              <li>За потреби — сформуй email</li>
+              <li>Обрати страви на тиждень</li>
+              <li>Згенерувати інгредієнти (на весь тиждень)</li>
+              <li>Відмітити «вже є»</li>
+              <li>Сформувати email зі списком покупок</li>
             </ol>
           </article>
 
           <article class="card">
-            <h3>Вимоги (коротко)</h3>
+            <h3>Обмеження (чесно)</h3>
             <ul class="list">
-              <li><strong>Функціональні:</strong> план тижня, генерація інгредієнтів, чекліст</li>
-              <li><strong>Нефункціональні:</strong> читабельність, швидкість, адаптивність</li>
-              <li><strong>GitHub Pages:</strong> <span class="kbd">main</span> → <span class="kbd">/(root)</span> і файл <span class="kbd">index.html</span></li>
+              <li>Без бекенду браузер не може відправляти email самостійно</li>
+              <li>Тому використовується <span class="kbd">mailto:</span> — відкривається пошта з готовим текстом</li>
+              <li>Це нормальна практика для ЛР (демо інтеграції)</li>
             </ul>
           </article>
         </div>
@@ -333,17 +265,15 @@
         <div class="section-head">
           <div>
             <h2>План харчування на тиждень</h2>
-            <p class="muted">Обери страви зі списку. Інгредієнти зберуться автоматично.</p>
+            <p class="muted">Обирай страви зі списку — інгредієнти перерахуються автоматично.</p>
           </div>
-          <button class="btn btn-primary" id="buildBtn" type="button">Оновити список</button>
+          <button class="btn btn-primary" id="buildBtn" type="button">Оновити інгредієнти</button>
         </div>
 
         <div class="card">
-          <div class="planner-grid" id="plannerGrid" aria-label="Планер тижня">
-            <!-- rows injected by JS -->
-          </div>
-          <p class="planner-note small muted">
-            Порада: можна змінювати страви — список покупок перераховується. Відмітки зберігаються локально.
+          <div class="planner-grid" id="plannerGrid" aria-label="Планер тижня"></div>
+          <p class="muted small" style="margin-top:10px">
+            Після вибору страв натисни <strong>«Оновити інгредієнти»</strong> або просто змінюй поля — список оновлюється.
           </p>
         </div>
       </div>
@@ -354,44 +284,43 @@
       <div class="container">
         <div class="section-head">
           <div>
-            <h2>Список покупок</h2>
-            <p class="muted">Натисни «Оновити список» у планері — тут з’являться інгредієнти.</p>
+            <h2>Інгредієнти на тиждень → Список покупок</h2>
+            <p class="muted">
+              Відмічай <strong>«вже є»</strong> — у «Списку покупок» залишиться те, що треба купити.
+            </p>
           </div>
           <div class="pill"><span>Збереження</span><span class="muted">localStorage</span></div>
         </div>
 
         <div class="grid-2">
           <div class="card">
-            <h3>Інгредієнти</h3>
-            <div id="autoList" class="checklist" aria-label="Автоматичний список покупок"></div>
-
-            <div class="actions">
-              <button class="btn btn-secondary" id="clearChecksBtn" type="button">Скинути відмітки</button>
-              <button class="btn btn-primary" id="emailBtn" type="button">Сформувати email</button>
+            <div class="split-note">
+              <h3>Інгредієнти (на весь тиждень)</h3>
+              <span class="muted small">✅ Відмічай те, що вже є вдома</span>
             </div>
 
-            <p class="muted small" style="margin-top:10px">
-              ✉️ Email відправляється через <span class="kbd">mailto:</span> (відкриє поштовий клієнт з готовим текстом).
-            </p>
+            <div id="weeklyIngredients" class="checklist" aria-label="Інгредієнти на тиждень"></div>
+
+            <div class="actions">
+              <button class="btn btn-secondary" id="markAllHaveBtn" type="button">Вже є все</button>
+              <button class="btn btn-secondary" id="clearHaveBtn" type="button">Скинути відмітки</button>
+            </div>
           </div>
 
           <aside class="card">
-            <h3>Нотатки</h3>
-            <p class="muted small">Додай свої позиції (для демонстрації роботи з формами).</p>
+            <div class="split-note">
+              <h3>Список покупок</h3>
+              <span class="muted small">🛒 Те, що НЕ відмічене</span>
+            </div>
 
-            <form id="noteForm">
-              <label class="muted small" for="noteInput">Нова позиція</label>
-              <div style="display:flex;gap:10px;margin-top:8px;flex-wrap:wrap">
-                <input id="noteInput" type="text" placeholder="Напр.: вівсянка, банани…" maxlength="60"
-                       style="flex:1;min-width:220px;padding:10px 10px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text)" />
-                <button class="btn btn-primary" type="submit">Додати</button>
-              </div>
-            </form>
+            <div id="shoppingList" class="checklist" aria-label="Список покупок"></div>
 
-            <ul id="notes" class="list" aria-label="Додані позиції"></ul>
+            <div class="actions">
+              <button class="btn btn-primary" id="emailBtn" type="button">Надіслати на пошту</button>
+            </div>
 
-            <p class="muted small" style="margin-top:14px">
-              📷 Фото: завантаж у репозиторій в папку <span class="kbd">images</span> і посилайся як <span class="kbd">images/імʼя-файлу.jpg</span>
+            <p class="muted small" style="margin-top:10px">
+              ✉️ Кнопка формує лист через <span class="kbd">mailto:</span>. Тобі залишиться натиснути “Send”.
             </p>
           </aside>
         </div>
@@ -404,7 +333,7 @@
         <div class="section-head">
           <div>
             <h2>Контакти</h2>
-            <p class="muted">Демо-форма (для ЛР). Дані не відправляються — лише приклад HTML.</p>
+            <p class="muted">Демо-форма (для ЛР). Дані не відправляються — приклад HTML-форми.</p>
           </div>
           <a class="btn btn-secondary" href="#top">↑ На початок</a>
         </div>
@@ -441,11 +370,9 @@
               <li><strong>ПІБ:</strong> Прізвище Імʼя</li>
               <li><strong>Група:</strong> ХХ-2Х</li>
               <li><strong>Рік:</strong> 2025</li>
-              <li><strong>Тема:</strong> Планування харчування / список покупок</li>
+              <li><strong>Тема:</strong> Планер харчування + список покупок</li>
             </ul>
-            <p class="muted small" style="margin-top:10px">
-              ✍️ Замінити на свої дані.
-            </p>
+            <p class="muted small" style="margin-top:10px">✍️ Замінити на свої дані.</p>
           </div>
         </div>
       </div>
@@ -460,7 +387,7 @@
   </footer>
 
   <script>
-    // --- Mobile menu toggle ---
+    // ===== Mobile menu =====
     const menuBtn = document.getElementById("menuBtn");
     const mobileNav = document.getElementById("mobileNav");
     if (menuBtn && mobileNav) {
@@ -482,20 +409,21 @@
       });
     }
 
-    // --- Data: Meals + ingredients (you can expand) ---
+    // ===== Data: Meals → Ingredients =====
+    // Можеш розширювати список страв і інгредієнтів.
     const MEALS = {
-      "Салат з тунцем": { mins: 10, ingredients: ["Тунець (консерва)", "Листя салату", "Огірок", "Помідори", "Оливкова олія"] },
-      "Паста з овочами": { mins: 25, ingredients: ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"] },
-      "Гречка + курка": { mins: 35, ingredients: ["Гречка", "Куряче філе", "Спеції"] },
-      "Овочевий суп": { mins: 40, ingredients: ["Картопля", "Морква", "Цибуля", "Лавровий лист"] },
-      "Омлет з сиром": { mins: 15, ingredients: ["Яйця", "Твердий сир", "Зелень"] },
-      "Запечена риба": { mins: 30, ingredients: ["Риба", "Лимон", "Сіль", "Перець"] },
-      "Чилі з квасолею": { mins: 35, ingredients: ["Квасоля", "Томатний соус", "Цибуля", "Спеції"] },
-      "Сирники": { mins: 35, ingredients: ["Творог", "Яйця", "Борошно", "Цукор"] },
-      "Смузі боул": { mins: 10, ingredients: ["Банан", "Ягоди", "Йогурт", "Вівсянка"] },
-      "Рис з овочами": { mins: 25, ingredients: ["Рис", "Овочева суміш", "Соєвий соус (опц.)"] },
-      "Кускус + овочі": { mins: 20, ingredients: ["Кускус", "Овочева суміш", "Оливкова олія"] },
-      "Йогурт + фрукти": { mins: 5, ingredients: ["Йогурт", "Фрукти"] }
+      "Салат з тунцем": ["Тунець (консерва)", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
+      "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"],
+      "Гречка + курка": ["Гречка", "Куряче філе", "Спеції"],
+      "Овочевий суп": ["Картопля", "Морква", "Цибуля", "Лавровий лист"],
+      "Омлет з сиром": ["Яйця", "Твердий сир", "Зелень"],
+      "Запечена риба": ["Риба", "Лимон", "Сіль", "Перець"],
+      "Чилі з квасолею": ["Квасоля", "Томатний соус", "Цибуля", "Спеції"],
+      "Сирники": ["Творог", "Яйця", "Борошно", "Цукор"],
+      "Смузі боул": ["Банан", "Ягоди", "Йогурт", "Вівсянка"],
+      "Рис з овочами": ["Рис", "Овочева суміш", "Соєвий соус (опц.)"],
+      "Кускус + овочі": ["Кускус", "Овочева суміш", "Оливкова олія"],
+      "Йогурт + фрукти": ["Йогурт", "Фрукти"]
     };
 
     const DAYS = [
@@ -518,41 +446,38 @@
       sun: { lunch: "Смузі боул", dinner: "Паста з овочами" }
     };
 
-    const LS_KEYS = {
-      plan: "mpb_plan_v1",
-      checks: "mpb_checks_v1",
-      notes: "mpb_notes_v1"
+    // ===== Storage keys =====
+    const LS = {
+      plan: "mpb_plan_v2",
+      have: "mpb_have_v2" // what user already has
     };
 
-    function loadPlan() {
-      try {
-        const raw = localStorage.getItem(LS_KEYS.plan);
+    function loadPlan(){
+      try{
+        const raw = localStorage.getItem(LS.plan);
         return raw ? JSON.parse(raw) : defaultPlan;
-      } catch {
-        return defaultPlan;
-      }
+      }catch{ return defaultPlan; }
     }
-    function savePlan(plan) {
-      localStorage.setItem(LS_KEYS.plan, JSON.stringify(plan));
+    function savePlan(plan){
+      localStorage.setItem(LS.plan, JSON.stringify(plan));
     }
-
-    function loadChecks() {
-      try {
-        const raw = localStorage.getItem(LS_KEYS.checks);
+    function loadHave(){
+      try{
+        const raw = localStorage.getItem(LS.have);
         return raw ? JSON.parse(raw) : {};
-      } catch {
-        return {};
-      }
+      }catch{ return {}; }
     }
-    function saveChecks(checks) {
-      localStorage.setItem(LS_KEYS.checks, JSON.stringify(checks));
+    function saveHave(have){
+      localStorage.setItem(LS.have, JSON.stringify(have));
     }
 
-    function normalizeKey(s) {
-      return s.toLowerCase().replace(/\s+/g, "_").replace(/[^\wа-яіїєґ_-]/gi, "");
+    function normalizeKey(s){
+      return s.toLowerCase()
+        .replace(/\s+/g, "_")
+        .replace(/[^\wа-яіїєґ_-]/gi, "");
     }
 
-    function mealOptionsHTML(selected) {
+    function mealOptionsHTML(selected){
       const opts = Object.keys(MEALS)
         .sort((a,b)=>a.localeCompare(b,"uk"))
         .map(name => `<option value="${name}" ${name===selected ? "selected" : ""}>${name}</option>`)
@@ -560,7 +485,7 @@
       return `<option value="">— обрати —</option>${opts}`;
     }
 
-    function renderPlanner() {
+    function renderPlanner(){
       const grid = document.getElementById("plannerGrid");
       const plan = loadPlan();
       grid.innerHTML = "";
@@ -586,7 +511,6 @@
         grid.appendChild(row);
       });
 
-      // Save on change
       grid.querySelectorAll("select").forEach(sel => {
         sel.addEventListener("change", () => {
           const day = sel.getAttribute("data-day");
@@ -598,12 +522,12 @@
           current[day][slot] = value;
           savePlan(current);
 
-          buildShoppingList(); // live update
+          buildWeeklyIngredients();
         });
       });
     }
 
-    function getSelectedMealsFromPlan(plan) {
+    function getMealsFromPlan(plan){
       const selected = [];
       DAYS.forEach(d => {
         const day = plan[d.key] || {};
@@ -613,164 +537,151 @@
       return selected;
     }
 
-    function buildShoppingList() {
+    // Build master ingredients for whole week (dedup + counts)
+    function computeWeeklyIngredients(){
       const plan = loadPlan();
-      const checks = loadChecks();
+      const selectedMeals = getMealsFromPlan(plan);
 
-      const mealsSelected = getSelectedMealsFromPlan(plan);
-      const ingredientMap = new Map(); // name -> {count, fromMeals:Set, key}
-
-      mealsSelected.forEach(mealName => {
-        const data = MEALS[mealName];
-        if (!data) return;
-        data.ingredients.forEach(ing => {
-          const key = normalizeKey(ing);
-          if (!ingredientMap.has(ing)) {
-            ingredientMap.set(ing, { count: 1, fromMeals: new Set([mealName]), key });
-          } else {
-            const obj = ingredientMap.get(ing);
-            obj.count += 1;
-            obj.fromMeals.add(mealName);
-          }
+      const map = new Map(); // ingredient -> {count, key}
+      selectedMeals.forEach(meal => {
+        const ings = MEALS[meal];
+        if (!ings) return;
+        ings.forEach(ing => {
+          if (!map.has(ing)) map.set(ing, { count: 1, key: normalizeKey(ing) });
+          else map.get(ing).count += 1;
         });
       });
 
-      const listEl = document.getElementById("autoList");
-      listEl.innerHTML = "";
+      return Array.from(map.entries())
+        .map(([name, meta]) => ({ name, count: meta.count, key: meta.key }))
+        .sort((a,b)=>a.name.localeCompare(b.name,"uk"));
+    }
 
-      const sortedIngredients = Array.from(ingredientMap.entries())
-        .sort((a,b)=>a[0].localeCompare(b[0],"uk"));
+    function buildWeeklyIngredients(){
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
 
-      if (sortedIngredients.length === 0) {
-        listEl.innerHTML = `<p class="muted">Обери страви у планері, щоб сформувати список.</p>`;
+      const weeklyEl = document.getElementById("weeklyIngredients");
+      weeklyEl.innerHTML = "";
+
+      if (weekly.length === 0){
+        weeklyEl.innerHTML = `<p class="muted">Обери страви в планері, щоб сформувати інгредієнти.</p>`;
+        renderShoppingList(); // empty too
         return;
       }
 
-      sortedIngredients.forEach(([name, meta]) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "item";
-
-        const checked = !!checks[meta.key];
-
-        wrapper.innerHTML = `
+      weekly.forEach(item => {
+        const checked = !!have[item.key]; // "already have"
+        const row = document.createElement("div");
+        row.className = "item";
+        row.innerHTML = `
           <label>
-            <input type="checkbox" data-key="${meta.key}" ${checked ? "checked" : ""}>
-            <span>${name}</span>
+            <input type="checkbox" data-key="${item.key}" ${checked ? "checked" : ""}>
+            <span>${item.name}</span>
           </label>
-          <span class="tag">×${meta.count}</span>
+          <span class="tag">×${item.count}</span>
         `;
-
-        wrapper.querySelector("input").addEventListener("change", (e) => {
+        row.querySelector("input").addEventListener("change", (e) => {
           const k = e.target.getAttribute("data-key");
-          const updated = loadChecks();
+          const updated = loadHave();
           updated[k] = e.target.checked;
-          saveChecks(updated);
+          saveHave(updated);
+          renderShoppingList();
         });
+        weeklyEl.appendChild(row);
+      });
 
-        listEl.appendChild(wrapper);
+      renderShoppingList();
+    }
+
+    // Shopping list = weekly ingredients that are NOT checked "have"
+    function renderShoppingList(){
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
+
+      const shopping = weekly.filter(x => !have[x.key]);
+      const shoppingEl = document.getElementById("shoppingList");
+      shoppingEl.innerHTML = "";
+
+      if (weekly.length === 0){
+        shoppingEl.innerHTML = `<p class="muted">Спочатку сформуй інгредієнти через планер.</p>`;
+        return;
+      }
+
+      if (shopping.length === 0){
+        shoppingEl.innerHTML = `<p class="muted">🎉 Супер! Схоже, що все необхідне вже є.</p>`;
+        return;
+      }
+
+      shopping.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "item";
+        row.innerHTML = `
+          <div style="display:flex;align-items:center;gap:10px">
+            <span>🛒</span>
+            <span>${item.name}</span>
+          </div>
+          <span class="tag">×${item.count}</span>
+        `;
+        shoppingEl.appendChild(row);
       });
     }
 
-    // --- Email (mailto) ---
-    function makeEmailBody() {
+    function buildEmailText(){
       const plan = loadPlan();
-      const mealsSelected = getSelectedMealsFromPlan(plan);
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
+      const toBuy = weekly.filter(x => !have[x.key]);
 
-      // Ingredients list (only checked items)
-      const checkedNames = [];
-      document.querySelectorAll("#autoList input[type='checkbox']").forEach(cb => {
-        if (cb.checked) {
-          const labelText = cb.parentElement.querySelector("span")?.textContent?.trim();
-          if (labelText) checkedNames.push(labelText);
-        }
-      });
-
-      const planLines = [];
-      DAYS.forEach(d => {
+      const planLines = DAYS.map(d => {
         const day = plan[d.key] || {};
         const l = day.lunch || "—";
         const dn = day.dinner || "—";
-        planLines.push(`${d.label}: Обід — ${l}; Вечеря — ${dn}`);
+        return `${d.label}: Обід — ${l}; Вечеря — ${dn}`;
       });
 
-      const body =
-`Мій тижневий план (MealPrep Buddy):
+      const buyLines = toBuy.length
+        ? toBuy.map(x => `- ${x.name} (×${x.count})`).join("\n")
+        : "(Усе вже є вдома)";
+
+      return `MealPrep Buddy — Список покупок
+
+План на тиждень:
 ${planLines.join("\n")}
 
-Список покупок (позначене як потрібне):
-${checkedNames.length ? checkedNames.map(x=>"- " + x).join("\n") : "(нічого не вибрано — відміть інгредієнти)"}
+Список покупок (те, що НЕ відмічено як "вже є"):
+${buyLines}
 `;
-      return body;
     }
 
-    // --- Notes (simple demo, localStorage) ---
-    function loadNotes() {
-      try {
-        const raw = localStorage.getItem(LS_KEYS.notes);
-        return raw ? JSON.parse(raw) : [];
-      } catch { return []; }
-    }
-    function saveNotes(notes) {
-      localStorage.setItem(LS_KEYS.notes, JSON.stringify(notes));
-    }
-    function renderNotes() {
-      const notesEl = document.getElementById("notes");
-      const notes = loadNotes();
-      notesEl.innerHTML = "";
-      notes.forEach((n, idx) => {
-        const li = document.createElement("li");
-        li.style.display = "flex";
-        li.style.alignItems = "center";
-        li.style.justifyContent = "space-between";
-        li.style.gap = "10px";
-        li.style.padding = "6px 0";
-        li.innerHTML = `
-          <span>${n}</span>
-          <button class="btn btn-secondary" type="button" data-i="${idx}" style="padding:6px 10px;border-radius:10px">Видалити</button>
-        `;
-        li.querySelector("button").addEventListener("click", () => {
-          const arr = loadNotes();
-          arr.splice(idx, 1);
-          saveNotes(arr);
-          renderNotes();
-        });
-        notesEl.appendChild(li);
-      });
-    }
-
-    // --- Wire up buttons ---
+    // ===== Buttons =====
     document.getElementById("buildBtn").addEventListener("click", () => {
-      buildShoppingList();
+      buildWeeklyIngredients();
       document.getElementById("shopping").scrollIntoView({ behavior: "smooth" });
     });
 
-    document.getElementById("clearChecksBtn").addEventListener("click", () => {
-      localStorage.removeItem(LS_KEYS.checks);
-      buildShoppingList();
+    document.getElementById("clearHaveBtn").addEventListener("click", () => {
+      localStorage.removeItem(LS.have);
+      buildWeeklyIngredients();
+    });
+
+    document.getElementById("markAllHaveBtn").addEventListener("click", () => {
+      const weekly = computeWeeklyIngredients();
+      const have = {};
+      weekly.forEach(x => { have[x.key] = true; });
+      saveHave(have);
+      buildWeeklyIngredients();
     });
 
     document.getElementById("emailBtn").addEventListener("click", () => {
-      const subject = encodeURIComponent("Список покупок — MealPrep Buddy");
-      const body = encodeURIComponent(makeEmailBody());
+      const subject = encodeURIComponent("Список покупок — MealPrep Buddy (тиждень)");
+      const body = encodeURIComponent(buildEmailText());
       window.location.href = `mailto:?subject=${subject}&body=${body}`;
     });
 
-    document.getElementById("noteForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const input = document.getElementById("noteInput");
-      const val = (input.value || "").trim();
-      if (!val) return;
-      const notes = loadNotes();
-      notes.push(val);
-      saveNotes(notes);
-      input.value = "";
-      renderNotes();
-    });
-
-    // --- Init ---
+    // ===== Init =====
     renderPlanner();
-    buildShoppingList();
-    renderNotes();
+    buildWeeklyIngredients();
   </script>
 </body>
 </html>
