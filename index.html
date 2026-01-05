@@ -5,141 +5,336 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MealPrep Buddy</title>
   <meta name="description" content="Тижневий план харчування та автоматичний список покупок." />
-
-  <!-- IMPORTANT: make sure this filename matches your CSS -->
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <header class="site-header" id="top">
+    <div class="container header-row">
+      <a class="brand" href="#top" aria-label="На початок">
+        <span class="brand-mark">🍲</span>
+        <span class="brand-text">MealPrep Buddy</span>
+      </a>
 
-<header class="site-header" id="top">
-  <div class="container header-row">
-    <div class="brand">
-      <span>🍲</span>
-      <span>MealPrep Buddy</span>
+      <nav class="nav" aria-label="Навігація">
+        <a href="#planner">План тижня</a>
+        <a href="#shopping">Список покупок</a>
+      </nav>
     </div>
+  </header>
 
-    <nav class="nav">
-      <a href="#planner">План тижня</a>
-      <a href="#shopping">Список покупок</a>
-    </nav>
-  </div>
-</header>
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container grid-2 hero-grid">
+        <div>
+          <h1>Плануй харчування на тиждень</h1>
+          <p class="muted lead">
+            Обери страви на кожен день. Інгредієнти для всіх страв на тиждень зберуться автоматично.
+            Відмічай, що вже є вдома — решта сформується у список покупок.
+          </p>
 
-<main>
+          <div class="hero-actions">
+            <a class="btn" href="#planner">Перейти до плану</a>
+            <a class="btn" href="#shopping">Переглянути список</a>
+          </div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container grid-2">
-      <div>
-        <h1>Плануй харчування на тиждень</h1>
-        <p class="muted">
-          Обери страви на кожен день, відміть що вже є вдома —
-          решта автоматично сформується у список покупок.
-        </p>
+          <ul class="hero-bullets">
+            <li>7 днів (обід + вечеря)</li>
+            <li>Інгредієнти з підрахунком повторів</li>
+            <li>Список покупок оновлюється в один клік</li>
+          </ul>
+        </div>
 
-        <div class="hero-actions">
-          <a class="btn" href="#planner">Перейти до плану</a>
-          <a class="btn" href="#shopping">Переглянути список</a>
+        <div class="hero-image">
+          <img src="images/mealprep-hero.jpg" alt="Планування харчування на тиждень" />
         </div>
       </div>
+    </section>
 
-      <div class="hero-image">
-        <img src="images/mealprep-hero.jpg" alt="Планування харчування на тиждень" />
-      </div>
-    </div>
-  </section>
-
-  <!-- PLANNER -->
-  <section class="section" id="planner">
-    <div class="container">
-      <h2>План харчування на тиждень</h2>
-
-      <div class="card">
-        <div class="planner-row">
-          <strong>Пн</strong>
-          <select>
-            <option>Салат з тунцем</option>
-            <option>Гречка + курка</option>
-            <option>Омлет з сиром</option>
-          </select>
-          <select>
-            <option>Паста з овочами</option>
-            <option>Рис з овочами</option>
-            <option>Овочевий суп</option>
-          </select>
+    <!-- PLANNER -->
+    <section class="section" id="planner">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>План харчування на тиждень</h2>
+            <p class="muted">Зміни страви — список інгредієнтів і покупок оновиться автоматично.</p>
+          </div>
+          <button class="btn" id="buildBtn" type="button">Оновити</button>
         </div>
 
-        <div class="planner-row">
-          <strong>Вт</strong>
-          <select>
-            <option>Гречка + курка</option>
-            <option>Салат з тунцем</option>
-            <option>Йогурт + фрукти</option>
-          </select>
-          <select>
-            <option>Овочевий суп</option>
-            <option>Паста з овочами</option>
-            <option>Рис з овочами</option>
-          </select>
-        </div>
-
-        <div class="planner-row">
-          <strong>Ср</strong>
-          <select>
-            <option>Омлет з сиром</option>
-            <option>Смузі боул</option>
-            <option>Сирники</option>
-          </select>
-          <select>
-            <option>Рис з овочами</option>
-            <option>Кускус + овочі</option>
-            <option>Запечена риба</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHOPPING -->
-  <section class="section" id="shopping">
-    <div class="container">
-      <h2>Список покупок</h2>
-
-      <div class="grid-2">
         <div class="card">
-          <h3>Інгредієнти</h3>
-          <div class="checklist">
-            <label><input type="checkbox"> Тунець</label>
-            <label><input type="checkbox"> Гречка</label>
-            <label><input type="checkbox"> Куряче філе</label>
-            <label><input type="checkbox"> Паста</label>
-            <label><input type="checkbox"> Яйця</label>
-            <label><input type="checkbox"> Сир</label>
+          <div class="planner-grid" id="plannerGrid" aria-label="Планер тижня"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOPPING -->
+    <section class="section" id="shopping">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Інгредієнти та список покупок</h2>
+            <p class="muted">Відмічай «вже є» — і залишаться лише позиції для покупки.</p>
           </div>
         </div>
 
-        <div class="card">
-          <h3>Купити</h3>
-          <ul class="muted">
-            <li>Гречка</li>
-            <li>Куряче філе</li>
-            <li>Паста</li>
-          </ul>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Інгредієнти на тиждень</h3>
+            <div id="weeklyIngredients" class="checklist" aria-label="Інгредієнти на тиждень"></div>
 
-          <button class="btn">Надіслати на email</button>
+            <div class="actions">
+              <button class="btn" id="markAllHaveBtn" type="button">Вже є все</button>
+              <button class="btn" id="clearHaveBtn" type="button">Скинути</button>
+            </div>
+          </div>
+
+          <aside class="card">
+            <h3>Список покупок</h3>
+            <div id="shoppingList" class="checklist" aria-label="Список покупок"></div>
+
+            <div class="actions">
+              <button class="btn" id="emailBtn" type="button">Надіслати на email</button>
+            </div>
+          </aside>
         </div>
       </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <span>© 2025 MealPrep Buddy</span>
     </div>
-  </section>
+  </footer>
 
-</main>
+  <script>
+    const MEALS = {
+      "Салат з тунцем": ["Тунець (консерва)", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
+      "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"],
+      "Гречка + курка": ["Гречка", "Куряче філе", "Спеції"],
+      "Овочевий суп": ["Картопля", "Морква", "Цибуля", "Лавровий лист"],
+      "Омлет з сиром": ["Яйця", "Твердий сир", "Зелень"],
+      "Запечена риба": ["Риба", "Лимон", "Сіль", "Перець"],
+      "Чилі з квасолею": ["Квасоля", "Томатний соус", "Цибуля", "Спеції"],
+      "Сирники": ["Творог", "Яйця", "Борошно", "Цукор"],
+      "Смузі боул": ["Банан", "Ягоди", "Йогурт", "Вівсянка"],
+      "Рис з овочами": ["Рис", "Овочева суміш", "Соєвий соус (опц.)"],
+      "Кускус + овочі": ["Кускус", "Овочева суміш", "Оливкова олія"],
+      "Йогурт + фрукти": ["Йогурт", "Фрукти"]
+    };
 
-<footer class="site-footer">
-  <div class="container footer-row">
-    <span>© 2025 MealPrep Buddy</span>
-  </div>
-</footer>
+    const DAYS = [
+      { key: "mon", label: "Пн" },
+      { key: "tue", label: "Вт" },
+      { key: "wed", label: "Ср" },
+      { key: "thu", label: "Чт" },
+      { key: "fri", label: "Пт" },
+      { key: "sat", label: "Сб" },
+      { key: "sun", label: "Нд" },
+    ];
 
+    const defaultPlan = {
+      mon: { lunch: "Салат з тунцем", dinner: "Паста з овочами" },
+      tue: { lunch: "Гречка + курка", dinner: "Овочевий суп" },
+      wed: { lunch: "Омлет з сиром", dinner: "Рис з овочами" },
+      thu: { lunch: "Йогурт + фрукти", dinner: "Запечена риба" },
+      fri: { lunch: "Салат з тунцем", dinner: "Чилі з квасолею" },
+      sat: { lunch: "Сирники", dinner: "Кускус + овочі" },
+      sun: { lunch: "Смузі боул", dinner: "Паста з овочами" }
+    };
+
+    const LS = { plan: "mpb_plan_final", have: "mpb_have_final" };
+
+    function loadPlan(){
+      try { return JSON.parse(localStorage.getItem(LS.plan)) || defaultPlan; }
+      catch { return defaultPlan; }
+    }
+    function savePlan(plan){ localStorage.setItem(LS.plan, JSON.stringify(plan)); }
+
+    function loadHave(){
+      try { return JSON.parse(localStorage.getItem(LS.have)) || {}; }
+      catch { return {}; }
+    }
+    function saveHave(have){ localStorage.setItem(LS.have, JSON.stringify(have)); }
+
+    function normalizeKey(s){
+      return s.toLowerCase().replace(/\s+/g, "_").replace(/[^\wа-яіїєґ_-]/gi, "");
+    }
+
+    function mealOptionsHTML(selected){
+      const opts = Object.keys(MEALS)
+        .sort((a,b)=>a.localeCompare(b,"uk"))
+        .map(name => `<option value="${name}" ${name===selected ? "selected" : ""}>${name}</option>`)
+        .join("");
+      return `<option value="">— обрати —</option>${opts}`;
+    }
+
+    function renderPlanner(){
+      const grid = document.getElementById("plannerGrid");
+      const plan = loadPlan();
+      grid.innerHTML = "";
+
+      DAYS.forEach(d => {
+        const row = document.createElement("div");
+        row.className = "planner-row";
+        row.innerHTML = `
+          <div class="day">${d.label}</div>
+          <div>
+            <div class="muted small" style="margin-bottom:6px">Обід</div>
+            <select data-day="${d.key}" data-slot="lunch" aria-label="Обід ${d.label}">
+              ${mealOptionsHTML(plan[d.key]?.lunch || "")}
+            </select>
+          </div>
+          <div>
+            <div class="muted small" style="margin-bottom:6px">Вечеря</div>
+            <select data-day="${d.key}" data-slot="dinner" aria-label="Вечеря ${d.label}">
+              ${mealOptionsHTML(plan[d.key]?.dinner || "")}
+            </select>
+          </div>
+        `;
+        grid.appendChild(row);
+      });
+
+      grid.querySelectorAll("select").forEach(sel => {
+        sel.addEventListener("change", () => {
+          const day = sel.getAttribute("data-day");
+          const slot = sel.getAttribute("data-slot");
+          const value = sel.value;
+
+          const current = loadPlan();
+          current[day] = current[day] || { lunch:"", dinner:"" };
+          current[day][slot] = value;
+          savePlan(current);
+
+          buildWeeklyIngredients();
+        });
+      });
+    }
+
+    function getMealsFromPlan(plan){
+      const selected = [];
+      DAYS.forEach(d => {
+        const day = plan[d.key] || {};
+        if (day.lunch) selected.push(day.lunch);
+        if (day.dinner) selected.push(day.dinner);
+      });
+      return selected;
+    }
+
+    function computeWeeklyIngredients(){
+      const plan = loadPlan();
+      const selectedMeals = getMealsFromPlan(plan);
+
+      const map = new Map();
+      selectedMeals.forEach(meal => {
+        const ings = MEALS[meal];
+        if (!ings) return;
+        ings.forEach(ing => {
+          if (!map.has(ing)) map.set(ing, { count: 1, key: normalizeKey(ing) });
+          else map.get(ing).count += 1;
+        });
+      });
+
+      return Array.from(map.entries())
+        .map(([name, meta]) => ({ name, count: meta.count, key: meta.key }))
+        .sort((a,b)=>a.name.localeCompare(b.name,"uk"));
+    }
+
+    function buildWeeklyIngredients(){
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
+
+      const weeklyEl = document.getElementById("weeklyIngredients");
+      weeklyEl.innerHTML = "";
+
+      weekly.forEach(item => {
+        const checked = !!have[item.key];
+        const row = document.createElement("label");
+        row.innerHTML = `<input type="checkbox" data-key="${item.key}" ${checked ? "checked" : ""}> ${item.name} (×${item.count})`;
+        row.querySelector("input").addEventListener("change", (e) => {
+          const k = e.target.getAttribute("data-key");
+          const updated = loadHave();
+          updated[k] = e.target.checked;
+          saveHave(updated);
+          renderShoppingList();
+        });
+        weeklyEl.appendChild(row);
+      });
+
+      renderShoppingList();
+    }
+
+    function renderShoppingList(){
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
+      const shopping = weekly.filter(x => !have[x.key]);
+
+      const shoppingEl = document.getElementById("shoppingList");
+      shoppingEl.innerHTML = "";
+
+      if (shopping.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "muted";
+        empty.textContent = "Список покупок порожній.";
+        shoppingEl.appendChild(empty);
+        return;
+      }
+
+      shopping.forEach(item => {
+        const row = document.createElement("div");
+        row.textContent = `🛒 ${item.name} (×${item.count})`;
+        shoppingEl.appendChild(row);
+      });
+    }
+
+    function buildEmailText(){
+      const plan = loadPlan();
+      const weekly = computeWeeklyIngredients();
+      const have = loadHave();
+      const toBuy = weekly.filter(x => !have[x.key]);
+
+      const planLines = DAYS.map(d => {
+        const day = plan[d.key] || {};
+        const l = day.lunch || "—";
+        const dn = day.dinner || "—";
+        return `${d.label}: Обід — ${l}; Вечеря — ${dn}`;
+      });
+
+      const buyLines = toBuy.length
+        ? toBuy.map(x => `- ${x.name} (×${x.count})`).join("\n")
+        : "(Немає позицій)";
+
+      return `Список покупок\n\nПлан на тиждень:\n${planLines.join("\n")}\n\nКупити:\n${buyLines}\n`;
+    }
+
+    document.getElementById("buildBtn").addEventListener("click", () => {
+      buildWeeklyIngredients();
+      document.getElementById("shopping").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("clearHaveBtn").addEventListener("click", () => {
+      localStorage.removeItem(LS.have);
+      buildWeeklyIngredients();
+    });
+
+    document.getElementById("markAllHaveBtn").addEventListener("click", () => {
+      const weekly = computeWeeklyIngredients();
+      const have = {};
+      weekly.forEach(x => { have[x.key] = true; });
+      saveHave(have);
+      buildWeeklyIngredients();
+    });
+
+    document.getElementById("emailBtn").addEventListener("click", () => {
+      const subject = encodeURIComponent("Список покупок");
+      const body = encodeURIComponent(buildEmailText());
+      window.location.href = `mailto:?subject=${subject}&body=${body}`;
+    });
+
+    renderPlanner();
+    buildWeeklyIngredients();
+  </script>
 </body>
 </html>
