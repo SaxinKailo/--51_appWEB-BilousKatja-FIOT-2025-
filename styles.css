@@ -118,6 +118,11 @@ h1{
   flex-wrap:wrap;
   margin:14px 0 14px 0;
 }
+.hero-actions .btn {
+  background: linear-gradient(135deg, #7c5cff, rgba(124,92,255,.7)) !important;
+  color: #fff !important;
+  border: none !important;
+}
 .hero-bullets{
   margin:0;
   padding-left:18px;
