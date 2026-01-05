@@ -1,1 +1,51 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopping List</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="hero.html">🍲 MealPrep Buddy</a>
+      <nav class="nav">
+        <a href="planner.html">План тижня</a>
+        <a href="shopping.html">Список покупок</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container grid-2">
+        <div class="card">
+          <h3>Інгредієнти на тиждень</h3>
+          <div id="weeklyIngredients" class="checklist"></div>
+        </div>
+
+        <div class="card">
+          <h3>Список покупок</h3>
+          <div id="shoppingList" class="checklist"></div>
+
+          <div class="actions">
+            <button class="btn" id="emailBtn">Надіслати на email</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared script -->
+  <script src="app.js"></script>
+
+  <footer class="site-footer">
+    <div class="container">
+      Контакти:
+      <a href="mailto:contact@example.com">contact@example.com</a>
+    </div>
+  </footer>
+</body>
+</html>
 
