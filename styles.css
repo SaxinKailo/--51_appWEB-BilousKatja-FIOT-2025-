@@ -124,6 +124,23 @@ select,input,textarea{
   border-radius:12px;
   outline:none;
 }
+select{
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+}
+
+/* ВАЖЛИВО: стилі для випадаючого списку */
+select option{
+  background: #ffffff;
+  color: #000000;
+}
+
+/* коли пункт виділений */
+select option:checked,
+select option:hover{
+  background: #7c5cff;
+  color: #ffffff;
+}
 
 /* Checklist */
 .checklist label{
