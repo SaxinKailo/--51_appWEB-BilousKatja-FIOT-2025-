@@ -3,49 +3,63 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shopping List</title>
+  <title>MealPrep Buddy — Shopping</title>
+  <meta name="description" content="Список інгредієнтів та покупок." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
+  <header class="site-header" id="top">
     <div class="container header-row">
-      <a class="brand" href="hero.html">🍲 MealPrep Buddy</a>
-      <nav class="nav">
+      <a class="brand" href="hero.html" aria-label="На головну">
+        <span class="brand-mark">🍲</span>
+        <span class="brand-text">MealPrep Buddy</span>
+      </a>
+
+      <!-- ✅ Added explicit Hero link -->
+      <nav class="nav" aria-label="Навігація">
+        <a href="hero.html">Hero</a>
         <a href="planner.html">План тижня</a>
-        <a href="shopping.html">Список покупок</a>
+        <a href="shopping.html" aria-current="page">Список покупок</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section class="section">
-      <div class="container grid-2">
-        <div class="card">
-          <h3>Інгредієнти на тиждень</h3>
-          <div id="weeklyIngredients" class="checklist"></div>
+    <section class="section" id="shopping">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Інгредієнти та список покупок</h2>
+            <p class="muted">Відмічай «вже є» — і залишаться лише позиції для покупки.</p>
+          </div>
+          <a class="btn" href="planner.html">Назад до плану</a>
         </div>
 
-        <div class="card">
-          <h3>Список покупок</h3>
-          <div id="shoppingList" class="checklist"></div>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Інгредієнти на тиждень</h3>
+            <div id="weeklyIngredients" class="checklist" aria-label="Інгредієнти на тиждень"></div>
 
-          <div class="actions">
-            <button class="btn" id="emailBtn">Надіслати на email</button>
+            <div class="actions">
+              <button class="btn" id="markAllHaveBtn" type="button">Вже є все</button>
+              <button class="btn" id="clearHaveBtn" type="button">Скинути</button>
+            </div>
           </div>
+
+          <aside class="card">
+            <h3>Список покупок</h3>
+            <div id="shoppingList" class="checklist" aria-label="Список покупок"></div>
+
+            <div class="actions">
+              <button class="btn" id="emailBtn" type="button">Надіслати на email</button>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Shared script -->
-  <script src="app.js"></script>
-
-  <footer class="site-footer">
-    <div class="container">
-      Контакти:
-      <a href="mailto:contact@example.com">contact@example.com</a>
-    </div>
-  </footer>
-</body>
-</html>
-
+  <script>
+    const MEALS = {
+      "Салат з тунцем": ["Тунець (консерва)", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
+      "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник"]()
