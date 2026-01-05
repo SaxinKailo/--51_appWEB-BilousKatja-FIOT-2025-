@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MealPrep Buddy — План</title>
+  <title>MealPrep Buddy — План тижня</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-row">
-    <strong>🍲 MealPrep Buddy</strong>
-    <nav class="nav">
-      <a href="hero.html">Головна</a>
+    <a class="brand" href="./" aria-label="Головна">🍲 MealPrep Buddy</a>
+    <nav class="nav" aria-label="Навігація">
+      <a href="./">Головна</a>
       <a href="planner.html" aria-current="page">План тижня</a>
       <a href="shopping.html">Список покупок</a>
     </nav>
@@ -20,91 +20,156 @@
 </header>
 
 <main>
-<section class="section">
-<div class="container">
-<h2>План харчування</h2>
+  <section class="section">
+    <div class="container">
+      <h2>План харчування на тиждень</h2>
+      <p class="muted">Обери страви на кожен день. Зміни збережуться автоматично.</p>
 
-<div id="plannerGrid"></div>
+      <div class="card">
+        <div id="plannerGrid"></div>
+      </div>
 
-<div style="margin-top:20px">
-  <a class="btn" href="shopping.html">Перейти до покупок</a>
-</div>
-</div>
-</section>
+      <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="btn" href="shopping.html">Перейти до покупок</a>
+        <button class="btn" id="resetBtn" type="button">Скинути план</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script>
-var MEALS = {
-  "Салат з тунцем": ["Тунець", "Салат", "Огірок"],
-  "Паста з овочами": ["Паста", "Перець", "Цибуля"],
-  "Гречка + курка": ["Гречка", "Курка"],
-  "Омлет": ["Яйця", "Сир"]
-};
+  // ES5 + robust storage (prevents blank page from JSON.parse crashes)
+  var LS_PLAN = "mpb_plan";
 
-var DAYS = [
-  {k:"mon", l:"Пн"},
-  {k:"tue", l:"Вт"},
-  {k:"wed", l:"Ср"},
-  {k:"thu", l:"Чт"},
-  {k:"fri", l:"Пт"},
-  {k:"sat", l:"Сб"},
-  {k:"sun", l:"Нд"}
-];
+  var MEALS = {
+    "Салат з тунцем": ["Тунець", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
+    "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"],
+    "Гречка + курка": ["Гречка", "Куряче філе", "Спеції"],
+    "Овочевий суп": ["Картопля", "Морква", "Цибуля", "Лавровий лист"],
+    "Омлет з сиром": ["Яйця", "Твердий сир", "Зелень"],
+    "Запечена риба": ["Риба", "Лимон", "Сіль", "Перець"],
+    "Чилі з квасолею": ["Квасоля", "Томатний соус", "Цибуля", "Спеції"],
+    "Сирники": ["Творог", "Яйця", "Борошно", "Цукор"],
+    "Смузі боул": ["Банан", "Ягоди", "Йогурт", "Вівсянка"],
+    "Рис з овочами": ["Рис", "Овочева суміш", "Соєвий соус (опц.)"],
+    "Кускус + овочі": ["Кускус", "Овочева суміш", "Оливкова олія"],
+    "Йогурт + фрукти": ["Йогурт", "Фрукти"]
+  };
 
-var defaultPlan = {
-  mon:{lunch:"Салат з тунцем", dinner:"Паста з овочами"},
-  tue:{lunch:"Гречка + курка", dinner:"Омлет"}
-};
+  var DAYS = [
+    {k:"mon", l:"Пн"},
+    {k:"tue", l:"Вт"},
+    {k:"wed", l:"Ср"},
+    {k:"thu", l:"Чт"},
+    {k:"fri", l:"Пт"},
+    {k:"sat", l:"Сб"},
+    {k:"sun", l:"Нд"}
+  ];
 
-function loadPlan(){
-  var p = localStorage.getItem("plan");
-  return p ? JSON.parse(p) : defaultPlan;
-}
+  var defaultPlan = {
+    mon:{lunch:"Салат з тунцем", dinner:"Паста з овочами"},
+    tue:{lunch:"Гречка + курка", dinner:"Овочевий суп"},
+    wed:{lunch:"Омлет з сиром", dinner:"Рис з овочами"},
+    thu:{lunch:"Йогурт + фрукти", dinner:"Запечена риба"},
+    fri:{lunch:"Салат з тунцем", dinner:"Чилі з квасолею"},
+    sat:{lunch:"Сирники", dinner:"Кускус + овочі"},
+    sun:{lunch:"Смузі боул", dinner:"Паста з овочами"}
+  };
 
-function savePlan(p){
-  localStorage.setItem("plan", JSON.stringify(p));
-}
-
-function render(){
-  var plan = loadPlan();
-  var grid = document.getElementById("plannerGrid");
-  grid.innerHTML = "";
-
-  for(var i=0;i<DAYS.length;i++){
-    var d = DAYS[i];
-    var day = plan[d.k] || {};
-
-    var row = document.createElement("div");
-    row.innerHTML =
-      "<strong>"+d.l+"</strong><br>" +
-      "Обід: <select data-day='"+d.k+"' data-slot='lunch'>"+opts(day.lunch)+"</select> " +
-      "Вечеря: <select data-day='"+d.k+"' data-slot='dinner'>"+opts(day.dinner)+"</select>";
-
-    grid.appendChild(row);
+  function safeParse(raw){
+    try { return JSON.parse(raw); } catch(e) { return null; }
   }
 
-  var sels = grid.getElementsByTagName("select");
-  for(var s=0;s<sels.length;s++){
-    sels[s].onchange = function(){
-      var p = loadPlan();
-      var d = this.getAttribute("data-day");
-      var sl = this.getAttribute("data-slot");
-      if(!p[d]) p[d]={};
-      p[d][sl]=this.value;
-      savePlan(p);
+  function loadPlan(){
+    var raw = localStorage.getItem(LS_PLAN);
+    if (!raw) return defaultPlan;
+
+    var parsed = safeParse(raw);
+    if (!parsed) {
+      localStorage.removeItem(LS_PLAN);
+      return defaultPlan;
+    }
+    return parsed;
+  }
+
+  function savePlan(p){
+    try { localStorage.setItem(LS_PLAN, JSON.stringify(p)); } catch(e) {}
+  }
+
+  function esc(s){
+    return String(s)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#39;");
+  }
+
+  function mealNames(){
+    var arr = [];
+    for (var m in MEALS) if (MEALS.hasOwnProperty(m)) arr.push(m);
+    arr.sort(function(a,b){ return a.localeCompare(b, "uk"); });
+    return arr;
+  }
+
+  function optionsHTML(selected){
+    var names = mealNames();
+    var html = "<option value=''>— обрати —</option>";
+    for (var i=0;i<names.length;i++){
+      var name = names[i];
+      html += "<option value='" + esc(name) + "'" + (name===selected ? " selected" : "") + ">" + name + "</option>";
+    }
+    return html;
+  }
+
+  function render(){
+    var plan = loadPlan();
+    var grid = document.getElementById("plannerGrid");
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    for (var i=0;i<DAYS.length;i++){
+      var d = DAYS[i];
+      var day = plan[d.k] || { lunch:"", dinner:"" };
+
+      var row = document.createElement("div");
+      row.className = "planner-row";
+
+      row.innerHTML =
+        "<div><strong>" + d.l + "</strong></div>" +
+        "<div style='margin-top:8px'>" +
+          "<span class='muted'>Обід:</span> " +
+          "<select data-day='" + d.k + "' data-slot='lunch'>" + optionsHTML(day.lunch || "") + "</select> " +
+          "<span class='muted' style='margin-left:10px'>Вечеря:</span> " +
+          "<select data-day='" + d.k + "' data-slot='dinner'>" + optionsHTML(day.dinner || "") + "</select>" +
+        "</div>";
+
+      grid.appendChild(row);
+    }
+
+    var selects = grid.getElementsByTagName("select");
+    for (var s=0;s<selects.length;s++){
+      selects[s].onchange = function(){
+        var p = loadPlan();
+        var dayKey = this.getAttribute("data-day");
+        var slot = this.getAttribute("data-slot");
+        if (!p[dayKey]) p[dayKey] = { lunch:"", dinner:"" };
+        p[dayKey][slot] = this.value;
+        savePlan(p);
+      };
+    }
+  }
+
+  var resetBtn = document.getElementById("resetBtn");
+  if (resetBtn){
+    resetBtn.onclick = function(){
+      localStorage.removeItem(LS_PLAN);
+      render();
     };
   }
-}
 
-function opts(sel){
-  var h = "<option value=''>—</option>";
-  for(var m in MEALS){
-    h+="<option"+(m===sel?" selected":"")+">"+m+"</option>";
-  }
-  return h;
-}
-
-render();
+  render();
 </script>
 
 <footer class="site-footer">
