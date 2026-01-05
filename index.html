@@ -10,8 +10,8 @@
 
 <header class="site-header">
   <div class="container header-row">
-    <strong>🍲 MealPrep Buddy</strong>
-    <nav class="nav">
+    <a class="brand" href="hero.html" aria-label="Головна">🍲 MealPrep Buddy</a>
+    <nav class="nav" aria-label="Навігація">
       <a href="planner.html">План тижня</a>
       <a href="shopping.html">Список покупок</a>
     </nav>
@@ -22,10 +22,11 @@
   <section class="hero">
     <div class="container">
       <h1>Плануй харчування на тиждень</h1>
-      <p>Обери страви — ми автоматично створимо список покупок.</p>
+      <p class="muted">Обери страви — список покупок сформується автоматично.</p>
 
-      <div style="margin-top:20px">
+      <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
         <a class="btn" href="planner.html">Почати планування</a>
+        <a class="btn" href="shopping.html">Перейти до покупок</a>
       </div>
     </div>
   </section>
