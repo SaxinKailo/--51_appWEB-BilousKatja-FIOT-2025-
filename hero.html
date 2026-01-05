@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MealPrep Buddy</title>
+  <title>MealPrep Buddy — Hero</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href="hero.html" aria-label="Головна">🍲 MealPrep Buddy</a>
+    <a class="brand" href="./" aria-label="Головна">🍲 MealPrep Buddy</a>
     <nav class="nav" aria-label="Навігація">
+      <a href="./">Головна</a>
       <a href="planner.html">План тижня</a>
       <a href="shopping.html">Список покупок</a>
     </nav>
@@ -22,11 +23,17 @@
   <section class="hero">
     <div class="container">
       <h1>Плануй харчування на тиждень</h1>
-      <p class="muted">Обери страви — список покупок сформується автоматично.</p>
+      <p class="muted">
+        Обери страви на кожен день — а ми автоматично сформуємо список покупок.
+      </p>
 
       <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
         <a class="btn" href="planner.html">Почати планування</a>
         <a class="btn" href="shopping.html">Перейти до покупок</a>
+      </div>
+
+      <div style="margin-top:16px" class="muted">
+        Якщо «План тижня» або «Список покупок» порожні — онови сторінку після очищення LocalStorage.
       </div>
     </div>
   </section>
