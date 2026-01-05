@@ -1,61 +1,41 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MealPrep Buddy</title>
-  <meta name="description" content="Тижневий план харчування та автоматичний список покупок." />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header" id="top">
-    <div class="container header-row">
-      <a class="brand" href="hero.html" aria-label="На головну">
-        <span class="brand-mark">🍲</span>
-        <span class="brand-text">MealPrep Buddy</span>
-      </a>
 
-      <nav class="nav" aria-label="Навігація">
-        <a href="planner.html">План тижня</a>
-        <a href="shopping.html">Список покупок</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="container header-row">
+    <strong>🍲 MealPrep Buddy</strong>
+    <nav class="nav">
+      <a href="planner.html">План тижня</a>
+      <a href="shopping.html">Список покупок</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="container grid-2 hero-grid">
-        <div>
-          <h1>Плануй харчування на тиждень</h1>
-          <p class="muted lead">
-            Обери страви на кожен день. Інгредієнти для всіх страв на тиждень зберуться автоматично.
-            Відмічай, що вже є вдома — решта сформується у список покупок.
-          </p>
+<main>
+  <section class="hero">
+    <div class="container">
+      <h1>Плануй харчування на тиждень</h1>
+      <p>Обери страви — ми автоматично створимо список покупок.</p>
 
-          <div class="hero-actions">
-            <a class="btn" href="planner.html">Перейти до плану</a>
-            <a class="btn" href="shopping.html">Переглянути список</a>
-          </div>
-
-          <ul class="hero-bullets">
-            <li>7 днів (обід + вечеря)</li>
-            <li>Інгредієнти з підрахунком повторів</li>
-            <li>Список покупок оновлюється автоматично</li>
-          </ul>
-        </div>
-
-        <div class="hero-image">
-          <img src="images/mealprep-hero.jpg" alt="Планування харчування на тиждень" />
-        </div>
+      <div style="margin-top:20px">
+        <a class="btn" href="planner.html">Почати планування</a>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-row" style="gap:12px; flex-wrap:wrap;">
-      <span>© 2025 MealPrep Buddy</span>
-      <span class="muted">Контакти: <a href="mailto:contact@example.com">contact@example.com</a></span>
     </div>
-  </footer>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    Контакти: <a href="mailto:contact@example.com">contact@example.com</a>
+  </div>
+</footer>
+
 </body>
 </html>
