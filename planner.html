@@ -1,114 +1,117 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MealPrep Buddy — Planner</title>
-  <meta name="description" content="План харчування на тиждень." />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MealPrep Buddy — План</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="site-header" id="top">
-    <div class="container header-row">
-      <a class="brand" href="hero.html" aria-label="На головну">
-        <span class="brand-mark">🍲</span>
-        <span class="brand-text">MealPrep Buddy</span>
-      </a>
 
-      <!-- ✅ Added explicit Hero link -->
-      <nav class="nav" aria-label="Навігація">
-        <a href="hero.html">Hero</a>
-        <a href="planner.html" aria-current="page">План тижня</a>
-        <a href="shopping.html">Список покупок</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+  <div class="container header-row">
+    <strong>🍲 MealPrep Buddy</strong>
+    <nav class="nav">
+      <a href="hero.html">Головна</a>
+      <a href="planner.html" aria-current="page">План тижня</a>
+      <a href="shopping.html">Список покупок</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="section" id="planner">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <h2>План харчування на тиждень</h2>
-            <p class="muted">Зміни страви — список інгредієнтів і покупок оновиться автоматично.</p>
-          </div>
-          <button class="btn" id="buildBtn" type="button">До списку покупок</button>
-        </div>
+<main>
+<section class="section">
+<div class="container">
+<h2>План харчування</h2>
 
-        <div class="card">
-          <div class="planner-grid" id="plannerGrid" aria-label="Планер тижня"></div>
-        </div>
+<div id="plannerGrid"></div>
 
-        <div class="actions" style="margin-top:16px;">
-          <a class="btn" href="shopping.html">Перейти до списку покупок</a>
-        </div>
-      </div>
-    </section>
-  </main>
+<div style="margin-top:20px">
+  <a class="btn" href="shopping.html">Перейти до покупок</a>
+</div>
+</div>
+</section>
+</main>
 
-  <script>
-    // --- Shared app logic (guarded so it works across separate pages) ---
-    const MEALS = {
-      "Салат з тунцем": ["Тунець (консерва)", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
-      "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"],
-      "Гречка + курка": ["Гречка", "Куряче філе", "Спеції"],
-      "Овочевий суп": ["Картопля", "Морква", "Цибуля", "Лавровий лист"],
-      "Омлет з сиром": ["Яйця", "Твердий сир", "Зелень"],
-      "Запечена риба": ["Риба", "Лимон", "Сіль", "Перець"],
-      "Чилі з квасолею": ["Квасоля", "Томатний соус", "Цибуля", "Спеції"],
-      "Сирники": ["Творог", "Яйця", "Борошно", "Цукор"],
-      "Смузі боул": ["Банан", "Ягоди", "Йогурт", "Вівсянка"],
-      "Рис з овочами": ["Рис", "Овочева суміш", "Соєвий соус (опц.)"],
-      "Кускус + овочі": ["Кускус", "Овочева суміш", "Оливкова олія"],
-      "Йогурт + фрукти": ["Йогурт", "Фрукти"]
+<script>
+var MEALS = {
+  "Салат з тунцем": ["Тунець", "Салат", "Огірок"],
+  "Паста з овочами": ["Паста", "Перець", "Цибуля"],
+  "Гречка + курка": ["Гречка", "Курка"],
+  "Омлет": ["Яйця", "Сир"]
+};
+
+var DAYS = [
+  {k:"mon", l:"Пн"},
+  {k:"tue", l:"Вт"},
+  {k:"wed", l:"Ср"},
+  {k:"thu", l:"Чт"},
+  {k:"fri", l:"Пт"},
+  {k:"sat", l:"Сб"},
+  {k:"sun", l:"Нд"}
+];
+
+var defaultPlan = {
+  mon:{lunch:"Салат з тунцем", dinner:"Паста з овочами"},
+  tue:{lunch:"Гречка + курка", dinner:"Омлет"}
+};
+
+function loadPlan(){
+  var p = localStorage.getItem("plan");
+  return p ? JSON.parse(p) : defaultPlan;
+}
+
+function savePlan(p){
+  localStorage.setItem("plan", JSON.stringify(p));
+}
+
+function render(){
+  var plan = loadPlan();
+  var grid = document.getElementById("plannerGrid");
+  grid.innerHTML = "";
+
+  for(var i=0;i<DAYS.length;i++){
+    var d = DAYS[i];
+    var day = plan[d.k] || {};
+
+    var row = document.createElement("div");
+    row.innerHTML =
+      "<strong>"+d.l+"</strong><br>" +
+      "Обід: <select data-day='"+d.k+"' data-slot='lunch'>"+opts(day.lunch)+"</select> " +
+      "Вечеря: <select data-day='"+d.k+"' data-slot='dinner'>"+opts(day.dinner)+"</select>";
+
+    grid.appendChild(row);
+  }
+
+  var sels = grid.getElementsByTagName("select");
+  for(var s=0;s<sels.length;s++){
+    sels[s].onchange = function(){
+      var p = loadPlan();
+      var d = this.getAttribute("data-day");
+      var sl = this.getAttribute("data-slot");
+      if(!p[d]) p[d]={};
+      p[d][sl]=this.value;
+      savePlan(p);
     };
+  }
+}
 
-    const DAYS = [
-      { key: "mon", label: "Пн" },
-      { key: "tue", label: "Вт" },
-      { key: "wed", label: "Ср" },
-      { key: "thu", label: "Чт" },
-      { key: "fri", label: "Пт" },
-      { key: "sat", label: "Сб" },
-      { key: "sun", label: "Нд" },
-    ];
+function opts(sel){
+  var h = "<option value=''>—</option>";
+  for(var m in MEALS){
+    h+="<option"+(m===sel?" selected":"")+">"+m+"</option>";
+  }
+  return h;
+}
 
-    const defaultPlan = {
-      mon: { lunch: "Салат з тунцем", dinner: "Паста з овочами" },
-      tue: { lunch: "Гречка + курка", dinner: "Овочевий суп" },
-      wed: { lunch: "Омлет з сиром", dinner: "Рис з овочами" },
-      thu: { lunch: "Йогурт + фрукти", dinner: "Запечена риба" },
-      fri: { lunch: "Салат з тунцем", dinner: "Чилі з квасолею" },
-      sat: { lunch: "Сирники", dinner: "Кускус + овочі" },
-      sun: { lunch: "Смузі боул", dinner: "Паста з овочами" }
-    };
+render();
+</script>
 
-    const LS = { plan: "mpb_plan_final", have: "mpb_have_final" };
+<footer class="site-footer">
+  <div class="container">
+    Контакти: <a href="mailto:contact@example.com">contact@example.com</a>
+  </div>
+</footer>
 
-    function loadPlan(){
-      try { return JSON.parse(localStorage.getItem(LS.plan)) || defaultPlan; }
-      catch { return defaultPlan; }
-    }
-    function savePlan(plan){ localStorage.setItem(LS.plan, JSON.stringify(plan)); }
-
-    function normalizeKey(s){
-      return s.toLowerCase().replace(/\s+/g, "_").replace(/[^\wа-яіїєґ_-]/gi, "");
-    }
-
-    function mealOptionsHTML(selected){
-      const opts = Object.keys(MEALS)
-        .sort((a,b)=>a.localeCompare(b,"uk"))
-        .map(name => `<option value="${name}" ${name===selected ? "selected" : ""}>${name}</option>`)
-        .join("");
-      return `<option value="">— обрати —</option>${opts}`;
-    }
-
-    function renderPlanner(){
-      const grid = document.getElementById("plannerGrid");
-      if (!grid) return;
-
-      const plan = loadPlan();
-      grid.innerHTML = "";
-
-      DAYS.forEach(d => {
-        const row = document.createEleme
+</body>
+</html>
