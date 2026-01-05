@@ -5,144 +5,259 @@
   --text:#e9ecf1;
   --muted:#b3b9c6;
   --line:rgba(255,255,255,.12);
+
+  /* keep your original accents (not used for buttons anymore) */
+  --accent:#6ee7b7;
+  --accent2:#60a5fa;
+
+  /* unified button purple */
   --purple:#7c5cff;
+
+  --danger:#fb7185;
 }
 
-/* Reset */
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
 body{
   margin:0;
-  font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   background:
-    radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,.18), transparent 55%),
-    radial-gradient(1100px 700px at 85% 5%, rgba(124,92,255,.12), transparent 55%),
+    radial-gradient(1200px 700px at 15% 10%, rgba(96,165,250,.18), transparent 55%),
+    radial-gradient(1100px 700px at 85% 5%, rgba(110,231,183,.14), transparent 55%),
     var(--bg);
   color:var(--text);
   line-height:1.55;
 }
-a{text-decoration:none;color:inherit}
 
-/* Layout */
-.container{width:min(1100px,92vw);margin:0 auto}
-.section{padding:42px 0}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:underline; }
 
-.card{
-  background:rgba(18,20,28,.75);
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 18px 40px rgba(0,0,0,.25);
+.container{
+  width:min(1100px, 92vw);
+  margin:0 auto;
 }
 
-.muted{color:var(--muted)}
-
-/* Header */
+/* HEADER */
 .site-header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(11,12,16,.72);
-  backdrop-filter:blur(10px);
+  position:sticky;
+  top:0;
+  z-index:10;
+  background: rgba(11,12,16,.72);
+  backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
 }
-.header-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 0;gap:16px;
-}
-.brand{font-weight:800;display:flex;gap:10px}
-.nav{display:flex;gap:14px}
-.nav a{padding:8px 10px;border-radius:12px}
-.nav a:hover{background:rgba(255,255,255,.06)}
-@media(max-width:860px){.nav{display:none}}
 
-/* Hero */
-.hero{padding:46px 0}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+.brand-mark{ font-size:20px; }
+.brand-text{ font-size:16px; }
+
+.nav{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  font-weight:600;
+}
+.nav a{
+  padding:8px 10px;
+  border-radius:12px;
+}
+.nav a:hover{
+  background: rgba(255,255,255,.06);
+  text-decoration:none;
+}
+
+.menu-btn{ display:none; }
+
+/* MOBILE NAV (kept) */
+.mobile-nav{
+  display:grid;
+  gap:8px;
+  padding:10px 0 14px 0;
+}
+.mobile-nav a{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+.mobile-nav a:hover{ text-decoration:none; }
+
+/* HERO */
+.hero{
+  padding:46px 0 18px 0;
+}
+.hero-grid{
+  align-items:center;
+}
 .hero-image img{
   width:100%;
   height:400px;
   object-fit:cover;
   border-radius:16px;
-  box-shadow:0 20px 40px rgba(0,0,0,.25);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
-@media(max-width:860px){.hero-image img{height:260px}}
 
 h1{
-  margin:0 0 10px;
-  font-size:clamp(28px,3.4vw,44px);
+  margin:0 0 10px 0;
+  font-size: clamp(28px, 3.4vw, 44px);
   line-height:1.12;
 }
 
-/* ========================= */
-/* ✅ ONE BUTTON STYLE ONLY */
-/* ========================= */
-.btn{
-  appearance:none;
-  border:none;
-  padding:12px 18px;
-  border-radius:14px;
-  font-weight:800;
-  cursor:pointer;
-
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-
-  background:linear-gradient(135deg,var(--purple),rgba(124,92,255,.85));
-  color:#fff;
-
-  box-shadow:0 10px 24px rgba(124,92,255,.35);
-  transition:background .15s ease,box-shadow .15s ease,transform .05s ease;
+.lead{
+  margin:0 0 16px 0;
+  color:var(--muted);
+  font-size: clamp(15px, 1.5vw, 18px);
 }
 
-.btn:hover{
-  background:linear-gradient(135deg,#6f4eff,rgba(124,92,255,.95));
-  box-shadow:0 14px 30px rgba(124,92,255,.45);
-}
-
-.btn:active{
-  transform:translateY(1px);
-}
-
-/* Planner */
-.planner-row{
-  display:grid;
-  grid-template-columns:90px 1fr 1fr;
+.hero-actions{
+  display:flex;
   gap:10px;
-  padding:10px;
-  border:1px solid var(--line);
-  border-radius:14px;
+  flex-wrap:wrap;
+  margin:14px 0 14px 0;
 }
 
-select,input,textarea{
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--line);
-  color:var(--text);
-  padding:10px;
-  border-radius:12px;
-  outline:none;
+.hero-bullets{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
 }
-select{
-  background: rgba(255,255,255,.06);
+
+/* SECTIONS */
+.section{
+  padding:42px 0;
+}
+.section.alt{
+  background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 45%);
+}
+
+.section-head{
+  margin-bottom:18px;
+}
+.section-head h2{
+  margin:0 0 6px 0;
+  font-size: clamp(20px, 2.4vw, 28px);
+}
+
+/* CARDS */
+.card{
+  border:1px solid var(--line);
+  background: rgba(18,20,28,.70);
+  border-radius:18px;
+  padding:16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+.card-title{ margin:0 0 10px 0; }
+
+.muted{ color:var(--muted); }
+.small{ font-size: 13px; }
+
+/* MINI GRID (kept) */
+.mini-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.mini{
+  padding:10px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+.mini-label{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+.mini-value{
+  display:block;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.note{
+  margin:12px 0 0 0;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px dashed rgba(110,231,183,.45);
+  background: rgba(110,231,183,.06);
   color: var(--text);
 }
 
-/* ВАЖЛИВО: стилі для випадаючого списку */
-select option{
-  background: #ffffff;
-  color: #000000;
+/* GRIDS */
+.cards-3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
 }
 
-/* коли пункт виділений */
-select option:checked,
-select option:hover{
-  background: #7c5cff;
-  color: #ffffff;
+.list{
+  margin:10px 0 0 0;
+  padding-left:18px;
+}
+.list li{ margin:6px 0; }
+
+/* TABLE */
+.table-wrap{
+  overflow:auto;
+  border-radius:18px;
+  border:1px solid var(--line);
+}
+.planner{
+  width:100%;
+  border-collapse:collapse;
+  min-width: 640px;
+  background: rgba(255,255,255,.02);
+}
+.planner th, .planner td{
+  padding:12px 12px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+.planner th{
+  position:sticky;
+  top:0;
+  background: rgba(18,20,28,.95);
+  font-weight:800;
 }
 
-/* Checklist */
+/* TIP */
+.tip{
+  margin-top:12px;
+  color:var(--muted);
+}
+.tip code{
+  padding:2px 6px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+/* CHECKLIST */
+.checklist h4{
+  margin:14px 0 8px 0;
+}
 .checklist label{
   display:flex;
   align-items:center;
@@ -150,18 +265,150 @@ select option:hover{
   padding:8px 10px;
   border-radius:12px;
   border:1px solid var(--line);
-  background:rgba(255,255,255,.03);
+  background: rgba(255,255,255,.03);
   margin-bottom:8px;
 }
+.checklist input{ width:18px; height:18px; }
 
-/* Footer */
+.actions{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+
+/* =========================================================
+   BUTTONS — unified purple for ALL buttons/links with .btn
+   (keeps .btn-primary/.btn-secondary for compatibility,
+    but makes them look the same)
+   ========================================================= */
+.btn{
+  border:1px solid rgba(124,92,255,.55);
+  padding:10px 14px;
+  border-radius:14px;
+  font-weight:800;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  color:#fff;
+
+  background: linear-gradient(135deg, var(--purple), rgba(124,92,255,.85));
+  box-shadow: 0 10px 24px rgba(124,92,255,.35);
+  transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.btn:hover{
+  text-decoration:none;
+  background: linear-gradient(135deg, #6f4eff, rgba(124,92,255,.95));
+  box-shadow: 0 14px 30px rgba(124,92,255,.45);
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+
+/* keep classes but make them same */
+.btn-primary{ }
+.btn-secondary{ }
+
+/* =========================================================
+   FORMS + INPUTS
+   ========================================================= */
+.form .field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+input, textarea{
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color: var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  outline:none;
+}
+
+input:focus, textarea:focus{
+  border-color: rgba(124,92,255,.65);
+}
+
+/* =========================================================
+   SELECT FIX (your exact problem)
+   ========================================================= */
+
+/* Keep select field dark like the site */
+select{
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color: var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  outline:none;
+
+  /* This is key: it forces the browser to render dropdown
+     with a light scheme on many systems, preventing white-on-white */
+  color-scheme: light;
+}
+
+/* Force readable options (works in many browsers) */
+select option{
+  background: #ffffff;
+  color: #111111;
+}
+
+/* some browsers use optgroup too */
+select optgroup{
+  background:#ffffff;
+  color:#111111;
+}
+
+/* If a browser supports it, make the chosen option clear */
+select option:checked{
+  background: #e9e3ff;
+  color: #111111;
+}
+
+/* NOTES block (kept) */
+.note-row{
+  display:flex;
+  gap:10px;
+}
+.notes{
+  margin:12px 0 0 0;
+  padding-left:18px;
+  color: var(--muted);
+}
+.notes li{
+  margin:6px 0;
+}
+
+/* FOOTER */
 .site-footer{
   border-top:1px solid var(--line);
   padding:18px 0;
-  background:rgba(0,0,0,.2);
+  background: rgba(0,0,0,.2);
 }
 .footer-row{
   display:flex;
   justify-content:space-between;
+  gap:14px;
   flex-wrap:wrap;
+}
+
+/* SR ONLY */
+.sr-only{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);
+  border:0;
+}
+
+/* Responsive */
+@media (max-width: 860px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .cards-3{ grid-template-columns: 1fr; }
+  .grid-2{ grid-template-columns: 1fr; }
+  .nav{ display:none; }
+  .menu-btn{ display:inline-flex; }
 }
