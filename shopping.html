@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MealPrep Buddy — Покупки</title>
+  <title>MealPrep Buddy — Список покупок</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-row">
-    <strong>🍲 MealPrep Buddy</strong>
-    <nav class="nav">
-      <a href="hero.html">Головна</a>
+    <a class="brand" href="./" aria-label="Головна">🍲 MealPrep Buddy</a>
+    <nav class="nav" aria-label="Навігація">
+      <a href="./">Головна</a>
       <a href="planner.html">План тижня</a>
       <a href="shopping.html" aria-current="page">Список покупок</a>
     </nav>
@@ -20,48 +20,236 @@
 </header>
 
 <main>
-<section class="section">
-<div class="container">
-<h2>Список покупок</h2>
-<div id="list"></div>
-</div>
-</section>
+  <section class="section">
+    <div class="container">
+      <h2>Інгредієнти та список покупок</h2>
+      <p class="muted">Список формується на основі вибраних страв у плані тижня.</p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Інгредієнти на тиждень</h3>
+          <div id="weeklyIngredients" class="checklist"></div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <button class="btn" id="markAllHaveBtn" type="button">Вже є все</button>
+            <button class="btn" id="clearHaveBtn" type="button">Скинути «вже є»</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Список покупок</h3>
+          <div id="shoppingList" class="checklist"></div>
+
+          <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn" href="planner.html">Назад до плану</a>
+            <button class="btn" id="emailBtn" type="button">Надіслати на email</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
 <script>
-var MEALS = {
-  "Салат з тунцем": ["Тунець", "Салат", "Огірок"],
-  "Паста з овочами": ["Паста", "Перець", "Цибуля"],
-  "Гречка + курка": ["Гречка", "Курка"],
-  "Омлет": ["Яйця", "Сир"]
-};
+  var LS_PLAN = "mpb_plan";
+  var LS_HAVE = "mpb_have";
 
-function loadPlan(){
-  var p = localStorage.getItem("plan");
-  return p ? JSON.parse(p) : {};
-}
+  var MEALS = {
+    "Салат з тунцем": ["Тунець", "Листя салату", "Огірок", "Помідори", "Оливкова олія"],
+    "Паста з овочами": ["Паста", "Болгарський перець", "Цибуля", "Часник", "Томатний соус"],
+    "Гречка + курка": ["Гречка", "Куряче філе", "Спеції"],
+    "Овочевий суп": ["Картопля", "Морква", "Цибуля", "Лавровий лист"],
+    "Омлет з сиром": ["Яйця", "Твердий сир", "Зелень"],
+    "Запечена риба": ["Риба", "Лимон", "Сіль", "Перець"],
+    "Чилі з квасолею": ["Квасоля", "Томатний соус", "Цибуля", "Спеції"],
+    "Сирники": ["Творог", "Яйця", "Борошно", "Цукор"],
+    "Смузі боул": ["Банан", "Ягоди", "Йогурт", "Вівсянка"],
+    "Рис з овочами": ["Рис", "Овочева суміш", "Соєвий соус (опц.)"],
+    "Кускус + овочі": ["Кускус", "Овочева суміш", "Оливкова олія"],
+    "Йогурт + фрукти": ["Йогурт", "Фрукти"]
+  };
 
-function build(){
-  var plan = loadPlan();
-  var map = {};
-  for(var d in plan){
-    for(var s in plan[d]){
-      var meal = plan[d][s];
-      var ings = MEALS[meal] || [];
-      for(var i=0;i<ings.length;i++){
-        map[ings[i]] = (map[ings[i]]||0)+1;
-      }
+  var DAYS = [
+    {k:"mon", l:"Пн"},
+    {k:"tue", l:"Вт"},
+    {k:"wed", l:"Ср"},
+    {k:"thu", l:"Чт"},
+    {k:"fri", l:"Пт"},
+    {k:"sat", l:"Сб"},
+    {k:"sun", l:"Нд"}
+  ];
+
+  function safeParse(raw){
+    try { return JSON.parse(raw); } catch(e) { return null; }
+  }
+
+  function loadPlan(){
+    var raw = localStorage.getItem(LS_PLAN);
+    if (!raw) return null;
+
+    var parsed = safeParse(raw);
+    if (!parsed) {
+      localStorage.removeItem(LS_PLAN);
+      return null;
+    }
+    return parsed;
+  }
+
+  function loadHave(){
+    var raw = localStorage.getItem(LS_HAVE);
+    if (!raw) return {};
+    var parsed = safeParse(raw);
+    if (!parsed) {
+      localStorage.removeItem(LS_HAVE);
+      return {};
+    }
+    return parsed;
+  }
+
+  function saveHave(have){
+    try { localStorage.setItem(LS_HAVE, JSON.stringify(have)); } catch(e) {}
+  }
+
+  function normalizeKey(s){
+    return String(s).toLowerCase().replace(/\s+/g,"_").replace(/[^a-z0-9а-яіїєґ_-]/gi,"");
+  }
+
+  function isEmptyPlan(p){
+    if (!p) return true;
+    for (var day in p){
+      if (!p.hasOwnProperty(day)) continue;
+      var v = p[day] || {};
+      if (v.lunch || v.dinner) return false;
+    }
+    return true;
+  }
+
+  function addMeal(counts, mealName){
+    if (!mealName) return;
+    var ings = MEALS[mealName];
+    if (!ings) return;
+    for (var i=0;i<ings.length;i++){
+      var ing = ings[i];
+      var key = normalizeKey(ing);
+      if (!counts[key]) counts[key] = { name: ing, key: key, count: 1 };
+      else counts[key].count += 1;
     }
   }
 
-  var el = document.getElementById("list");
-  el.innerHTML = "";
-  for(var k in map){
-    el.innerHTML += "🛒 "+k+" ×"+map[k]+"<br>";
-  }
-}
+  function computeWeeklyIngredients(plan){
+    var counts = {};
+    for (var i=0;i<DAYS.length;i++){
+      var d = DAYS[i].k;
+      var day = plan[d] || {};
+      addMeal(counts, day.lunch);
+      addMeal(counts, day.dinner);
+    }
 
-build();
+    var arr = [];
+    for (var k in counts) if (counts.hasOwnProperty(k)) arr.push(counts[k]);
+    arr.sort(function(a,b){ return a.name.localeCompare(b.name, "uk"); });
+    return arr;
+  }
+
+  function render(){
+    var weeklyEl = document.getElementById("weeklyIngredients");
+    var shoppingEl = document.getElementById("shoppingList");
+    if (!weeklyEl || !shoppingEl) return;
+
+    var plan = loadPlan();
+    if (!plan || isEmptyPlan(plan)){
+      weeklyEl.innerHTML = "<div class='muted'>Порожньо. Спочатку заповніть <a href='planner.html'>План тижня</a>.</div>";
+      shoppingEl.innerHTML = "<div class='muted'>Список покупок з’явиться після вибору страв.</div>";
+      return;
+    }
+
+    var weekly = computeWeeklyIngredients(plan);
+    var have = loadHave();
+
+    // weekly checklist
+    weeklyEl.innerHTML = "";
+    for (var i=0;i<weekly.length;i++){
+      (function(item){
+        var label = document.createElement("label");
+        var checked = !!have[item.key];
+        label.innerHTML = "<input type='checkbox' data-key='" + item.key + "'" + (checked ? " checked" : "") + "> " +
+          item.name + " (×" + item.count + ")";
+
+        var input = label.getElementsByTagName("input")[0];
+        input.onchange = function(){
+          var updated = loadHave();
+          updated[item.key] = !!input.checked;
+          saveHave(updated);
+          render();
+        };
+
+        weeklyEl.appendChild(label);
+      })(weekly[i]);
+    }
+
+    // shopping list = weekly - have
+    shoppingEl.innerHTML = "";
+    var any = false;
+    for (var j=0;j<weekly.length;j++){
+      if (!have[weekly[j].key]){
+        any = true;
+        var row = document.createElement("div");
+        row.appendChild(document.createTextNode("🛒 " + weekly[j].name + " (×" + weekly[j].count + ")"));
+        shoppingEl.appendChild(row);
+      }
+    }
+    if (!any){
+      shoppingEl.innerHTML = "<div class='muted'>Список покупок порожній — схоже, що все вже є 🙂</div>";
+    }
+  }
+
+  function buildEmailText(){
+    var plan = loadPlan();
+    if (!plan || isEmptyPlan(plan)) return "План порожній. Спочатку оберіть страви у Плані тижня.";
+
+    var weekly = computeWeeklyIngredients(plan);
+    var have = loadHave();
+
+    var lines = [];
+    for (var i=0;i<weekly.length;i++){
+      if (!have[weekly[i].key]) lines.push("- " + weekly[i].name + " (×" + weekly[i].count + ")");
+    }
+    if (!lines.length) lines.push("(Немає позицій — все вже є)");
+
+    return "Список покупок:\n\n" + lines.join("\n");
+  }
+
+  var clearHaveBtn = document.getElementById("clearHaveBtn");
+  if (clearHaveBtn){
+    clearHaveBtn.onclick = function(){
+      localStorage.removeItem(LS_HAVE);
+      render();
+    };
+  }
+
+  var markAllHaveBtn = document.getElementById("markAllHaveBtn");
+  if (markAllHaveBtn){
+    markAllHaveBtn.onclick = function(){
+      var plan = loadPlan();
+      if (!plan || isEmptyPlan(plan)) return;
+      var weekly = computeWeeklyIngredients(plan);
+      var have = {};
+      for (var i=0;i<weekly.length;i++) have[weekly[i].key] = true;
+      saveHave(have);
+      render();
+    };
+  }
+
+  var emailBtn = document.getElementById("emailBtn");
+  if (emailBtn){
+    emailBtn.onclick = function(){
+      var subject = encodeURIComponent("Список покупок");
+      var body = encodeURIComponent(buildEmailText());
+      window.location.href = "mailto:?subject=" + subject + "&body=" + body;
+    };
+  }
+
+  render();
 </script>
 
 <footer class="site-footer">
