@@ -165,9 +165,14 @@
   if (resetBtn){
     resetBtn.onclick = function(){
       localStorage.removeItem(LS_PLAN);
+      // after reset, we want defaults back AND saved so shopping can see them
+      savePlan(loadPlan());
       render();
     };
   }
+
+  // ✅ IMPORTANT: persist a plan immediately so shopping.html can read it on first visit
+  savePlan(loadPlan());
 
   render();
 </script>
