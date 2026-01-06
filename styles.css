@@ -561,7 +561,7 @@ select option:checked{
   object-position: center;
 
   /* 🔑 zoom in slightly to hide plate rim */
-  transform: scale(1.22);
+  transform: scale(0.95);
 }
 
 /* remove caption completely (in case it's still in HTML somewhere) */
