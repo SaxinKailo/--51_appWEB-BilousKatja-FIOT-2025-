@@ -554,3 +554,142 @@ select option:checked{
 
 /* remove caption completely (in case it's still in HTML somewhere) */
 .photo-caption{ display:none !important; }
+
+/* =========================================================
+   PLANNER PAGE — neon green theme + photo frame + aligned rows
+   ========================================================= */
+
+.page-planner.neon-green body {}
+
+/* Неоново-зелений фон з градієнтом тільки на planner */
+.page-planner.neon-green {
+  background:
+    radial-gradient(1200px 700px at 10% 10%, rgba(34,197,94,.30), transparent 55%),
+    radial-gradient(1100px 700px at 90% 15%, rgba(132,204,22,.22), transparent 55%),
+    radial-gradient(900px 600px at 50% 90%, rgba(16,185,129,.18), transparent 55%),
+    #070a0b;
+}
+
+/* Зелена назва застосунку + навігація тільки на planner */
+.page-planner.neon-green .brand,
+.page-planner.neon-green .nav a{
+  color: #86efac; /* neon green text */
+  text-shadow:
+    0 0 8px rgba(34,197,94,.75),
+    0 0 18px rgba(132,204,22,.45);
+}
+
+.page-planner.neon-green .nav a:hover{
+  background: rgba(34,197,94,.14);
+  text-decoration: none;
+  box-shadow: 0 0 16px rgba(34,197,94,.25);
+}
+
+/* Рамка планера повністю "фото" + оверлей для читабельності */
+.page-planner.neon-green .planner-frame{
+  position: relative;
+  overflow: hidden;
+
+  /* Постав свій шлях до картинки (приклад) */
+  background-image: url("images/planner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(34,197,94,.55);
+  box-shadow:
+    0 0 14px rgba(34,197,94,.55),
+    0 0 34px rgba(132,204,22,.30);
+}
+
+/* Темний прозорий шар поверх фото, щоб текст читався */
+.page-planner.neon-green .planner-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(7,10,11,.62);
+  pointer-events:none;
+}
+
+/* Контент поверх оверлея */
+.page-planner.neon-green #plannerGrid{
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Рядок: день + обід + вечеря в ОДИН РЯДОК --- */
+.page-planner.neon-green .planner-row{
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr; /* день | обід | вечеря */
+  gap: 12px;
+  align-items: center; /* вертикально по центру */
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(34,197,94,.25);
+  background: rgba(0,0,0,.18);
+  margin-bottom: 10px;
+}
+
+/* День тижня */
+.page-planner.neon-green .planner-row > div:first-child{
+  font-weight: 900;
+  color: #86efac;
+  text-shadow: 0 0 10px rgba(34,197,94,.55);
+}
+
+/* Прибираємо margin-top, який ти задавала inline (в render()) */
+.page-planner.neon-green .planner-row > div:nth-child(2){
+  margin-top: 0 !important;
+  display: grid;
+  grid-template-columns: 54px 1fr 70px 1fr; /* "Обід" + select + "Вечеря" + select */
+  gap: 10px;
+  align-items: center; /* все по центру */
+}
+
+/* Підписи "Обід/Вечеря" */
+.page-planner.neon-green .planner-row .muted{
+  color: rgba(167,243,208,.85);
+  font-weight: 700;
+}
+
+/* Селекти по центру і в неоново-зеленому стилі */
+.page-planner.neon-green select{
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(34,197,94,.55);
+  color: #eafff2;
+  border-radius: 14px;
+
+  box-shadow: 0 0 10px rgba(34,197,94,.20);
+  outline: none;
+}
+
+/* Edge dropdown: опції читабельні */
+.page-planner.neon-green select option,
+.page-planner.neon-green select optgroup{
+  background: #06110a;
+  color: #eafff2;
+}
+
+/* Трохи "глоу" на фокусі */
+.page-planner.neon-green select:focus{
+  border-color: rgba(34,197,94,.95);
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,.18),
+    0 0 18px rgba(34,197,94,.35);
+}
+
+/* На мобілках — щоб не ламалось */
+@media (max-width: 860px){
+  .page-planner.neon-green .planner-row{
+    grid-template-columns: 60px 1fr;
+  }
+  .page-planner.neon-green .planner-row > div:nth-child(2){
+    grid-template-columns: 54px 1fr;
+    row-gap: 10px;
+  }
+}
+
