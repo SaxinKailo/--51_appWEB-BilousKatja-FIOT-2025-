@@ -692,4 +692,23 @@ select option:checked{
     row-gap: 10px;
   }
 }
+/* =========================================
+   SHOPPING PAGE — full page background image
+   ========================================= */
+
+.page-shopping{
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.55)
+    ),
+    url("images/shopping.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
