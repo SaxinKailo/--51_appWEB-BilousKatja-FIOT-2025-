@@ -712,3 +712,110 @@ select option:checked{
   background-attachment: fixed;
 }
 
+/* =========================================================
+   SHOPPING PAGE — Neon Orange Theme 🔥🟠
+   ========================================================= */
+
+.page-shopping.neon-orange {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,140,0,.28), transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(255,165,0,.22), transparent 65%),
+    var(--bg);
+  color: #ffcb8e;
+}
+
+/* Neon orange nav + brand */
+.page-shopping.neon-orange .brand,
+.page-shopping.neon-orange .nav a {
+  color: #ff8c00; /* bright orange */
+  text-shadow:
+    0 0 8px rgba(255,140,0,.75),
+    0 0 14px rgba(255,165,0,.55);
+}
+
+.page-shopping.neon-orange .nav a:hover {
+  background: rgba(255,140,0,.12);
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(255,140,0,.30);
+}
+
+/* Cards & checklist items neon glow */
+.page-shopping.neon-orange .card,
+.page-shopping.neon-orange .checklist label {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255,165,0,.45),
+      rgba(255,140,0,.25) 60%,
+      rgba(18,20,28,.9)
+    );
+  border: 1px solid rgba(255,140,0,.70);
+  box-shadow:
+    0 0 12px rgba(255,140,0,.65),
+    0 0 26px rgba(255,165,0,.45),
+    inset 0 0 18px rgba(255,140,0,.35);
+  color: #fff5eb;
+}
+
+/* Buttons neon orange */
+.page-shopping.neon-orange .btn {
+  background: linear-gradient(
+    135deg,
+    #ff8c00,
+    #ff7f50,
+    #ffa500
+  );
+  border-color: rgba(255,140,0,.85);
+  color: #fff;
+  box-shadow:
+    0 0 12px rgba(255,140,0,.9),
+    0 0 28px rgba(255,165,0,.7),
+    0 0 48px rgba(255,140,0,.6);
+  text-shadow: 0 0 6px rgba(255,255,255,.8);
+}
+
+.page-shopping.neon-orange .btn:hover {
+  background: linear-gradient(
+    135deg,
+    #ff7f50,
+    #ffa500,
+    #ff4500
+  );
+  box-shadow:
+    0 0 18px rgba(255,140,0,1),
+    0 0 36px rgba(255,165,0,.9),
+    0 0 64px rgba(255,140,0,.8);
+}
+
+/* Checklist labels (checkbox text) */
+.page-shopping.neon-orange .checklist label {
+  color: #ffe9cc;
+}
+
+/* Shopping list text items */
+.page-shopping.neon-orange #shoppingList div {
+  color: #ffd8a8;
+  text-shadow: 0 0 6px rgba(255,140,0,.45);
+}
+
+/* Muted text subtle neon accent */
+.page-shopping.neon-orange .muted {
+  color: #ffb366;
+}
+
+/* Email button special glow */
+.page-shopping.neon-orange #emailBtn {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Scrollbar (optional neon orange) */
+.page-shopping.neon-orange ::-webkit-scrollbar {
+  width: 10px;
+}
+.page-shopping.neon-orange ::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.2);
+}
+.page-shopping.neon-orange ::-webkit-scrollbar-thumb {
+  background: rgba(255,140,0,.75);
+  border-radius: 8px;
+}
