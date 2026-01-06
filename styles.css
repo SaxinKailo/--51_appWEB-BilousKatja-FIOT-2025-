@@ -280,19 +280,25 @@ h1{
 .btn{
   font-family: inherit;   /* ✅ ADD THIS */
   font-size: 16px;        /* ✅ ADD THIS */
+
+  font-family: inherit;        /* ✅ однаковий шрифт */
+  font-size: 16px;             /* ✅ однаковий розмір тексту */
+  font-weight: 800;
+  line-height: 1;              /* ✅ однакова висота */
   
   border:1px solid rgba(124,92,255,.55);
-  padding:10px 14px;
-  border-radius:14px;
-  font-weight:800;
+  padding:14px 22px;           /* ✅ однакова висота кнопки */
+  border-radius:999px;
   cursor:pointer;
+
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:8px;
+
   text-decoration:none;
   color:#fff;
-
+  
   background: linear-gradient(135deg, var(--purple), rgba(124,92,255,.85));
   box-shadow: 0 10px 24px rgba(124,92,255,.35);
   transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
