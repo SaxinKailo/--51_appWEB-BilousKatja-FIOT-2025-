@@ -544,13 +544,10 @@ select option:checked{
   position: relative;
   overflow: hidden;
   border-radius: 18px;
-
-  /* choose an aspect ratio you like */
-  aspect-ratio: 16 / 10;
-
-  /* remove the light background that shows as “white lining” */
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.12);
+  padding: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
 }
 
 .home-photo img{
