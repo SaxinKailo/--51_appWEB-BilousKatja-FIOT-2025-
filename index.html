@@ -5,6 +5,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MealPrep Buddy — Головна</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Page-only styles (won't affect planner/shopping) -->
+  <style>
+    .home-hero {
+      padding: 48px 0;
+    }
+    .home-wrap {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .home-card {
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+    }
+    .home-title {
+      font-size: 40px;
+      line-height: 1.1;
+      margin: 0 0 10px 0;
+      letter-spacing: -0.02em;
+    }
+    .home-sub {
+      font-size: 16px;
+      margin: 0 0 18px 0;
+      opacity: 0.85;
+    }
+    .home-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .home-badges {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .badge {
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,0.08);
+      background: rgba(255,255,255,0.7);
+    }
+
+    .home-photo {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
+      min-height: 340px;
+      background: #f3f3f3;
+      position: relative;
+    }
+    .home-photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .photo-caption {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+      font-size: 13px;
+      backdrop-filter: blur(6px);
+    }
+
+    .home-features {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .feature {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.75);
+      font-size: 14px;
+    }
+    .feature strong { display: block; margin-bottom: 4px; }
+
+    .home-note {
+      margin-top: 14px;
+      font-size: 13px;
+      opacity: 0.75;
+    }
+
+    @media (max-width: 900px) {
+      .home-wrap { grid-template-columns: 1fr; }
+      .home-title { font-size: 34px; }
+      .home-features { grid-template-columns: 1fr; }
+      .home-photo { min-height: 260px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -20,20 +125,56 @@
 </header>
 
 <main>
-  <section class="hero">
+  <section class="home-hero">
     <div class="container">
-      <h1>Плануй харчування на тиждень</h1>
-      <p class="muted">
-        Обери страви на кожен день — а ми автоматично сформуємо список покупок.
-      </p>
+      <div class="home-wrap">
+        <div class="home-card">
+          <h1 class="home-title">Плануй харчування на тиждень легко</h1>
+          <p class="home-sub">
+            Обери страви на кожен день — а ми автоматично сформуємо інгредієнти та список покупок.
+          </p>
 
-      <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-        <a class="btn" href="planner.html">Почати планування</a>
-        <a class="btn" href="shopping.html">Перейти до покупок</a>
-      </div>
+          <div class="home-actions">
+            <a class="btn" href="planner.html">🍽️ Почати планування</a>
+            <a class="btn" href="shopping.html">🛒 До списку покупок</a>
+          </div>
 
-      <div style="margin-top:16px" class="muted">
-        Якщо «План тижня» або «Список покупок» порожні — онови сторінку.
+          <div class="home-badges">
+            <span class="badge">✅ Автозбереження</span>
+            <span class="badge">📦 Інгредієнти на тиждень</span>
+            <span class="badge">✉️ Надсилання на email</span>
+          </div>
+
+          <div class="home-features">
+            <div class="feature">
+              <strong>1) Обери страви</strong>
+              План на обід і вечерю.
+            </div>
+            <div class="feature">
+              <strong>2) Отримай інгредієнти</strong>
+              Підрахунок позицій (×2 тощо).
+            </div>
+            <div class="feature">
+              <strong>3) Купуй зручно</strong>
+              Позначай «вже є» та надсилай список.
+            </div>
+          </div>
+
+          <div class="home-note">
+            Порада: якщо відкриваєш сторінки через різні адреси (file:// та https://),
+            LocalStorage буде різним. Тестуй все з GitHub Pages.
+          </div>
+        </div>
+
+        <div class="home-photo" aria-label="Фото про планування харчування">
+          <!-- ✅ Варіант 1: поклади файл hero.jpg в корінь репозиторію поруч із index.html -->
+          <img src="hero.jpg" alt="Їжа та планування покупок">
+          <div class="photo-caption">MealPrep • Plan • Shop</div>
+
+          <!-- ✅ Варіант 2 (замість hero.jpg): встав URL, наприклад:
+          <img src="https://images.unsplash.com/..." alt="...">
+          -->
+        </div>
       </div>
     </div>
   </section>
