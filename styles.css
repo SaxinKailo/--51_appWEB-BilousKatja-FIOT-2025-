@@ -819,3 +819,19 @@ select option:checked{
   background: rgba(255,140,0,.75);
   border-radius: 8px;
 }
+/* SHOPPING — neon orange + photo background (full page) */
+.page-shopping.neon-orange{
+  min-height: 100vh;
+
+  /* gradients ON TOP of the photo */
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,140,0,.30), transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(255,165,0,.22), transparent 65%),
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("images/shopping.jpg"); /* <-- change to your filename */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
