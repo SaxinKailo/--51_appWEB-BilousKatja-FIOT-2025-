@@ -278,6 +278,9 @@ h1{
     but makes them look the same)
    ========================================================= */
 .btn{
+  font-family: inherit;   /* ✅ ADD THIS */
+  font-size: 16px;        /* ✅ ADD THIS */
+  
   border:1px solid rgba(124,92,255,.55);
   padding:10px 14px;
   border-radius:14px;
