@@ -79,18 +79,29 @@
     {k:"sun", l:"Нд"}
   ];
 
+  // ✅ Same default as planner.html so lists show even on first visit
+  var defaultPlan = {
+    mon:{lunch:"Салат з тунцем", dinner:"Паста з овочами"},
+    tue:{lunch:"Гречка + курка", dinner:"Овочевий суп"},
+    wed:{lunch:"Омлет з сиром", dinner:"Рис з овочами"},
+    thu:{lunch:"Йогурт + фрукти", dinner:"Запечена риба"},
+    fri:{lunch:"Салат з тунцем", dinner:"Чилі з квасолею"},
+    sat:{lunch:"Сирники", dinner:"Кускус + овочі"},
+    sun:{lunch:"Смузі боул", dinner:"Паста з овочами"}
+  };
+
   function safeParse(raw){
     try { return JSON.parse(raw); } catch(e) { return null; }
   }
 
   function loadPlan(){
     var raw = localStorage.getItem(LS_PLAN);
-    if (!raw) return null;
+    if (!raw) return defaultPlan;
 
     var parsed = safeParse(raw);
     if (!parsed) {
       localStorage.removeItem(LS_PLAN);
-      return null;
+      return defaultPlan;
     }
     return parsed;
   }
