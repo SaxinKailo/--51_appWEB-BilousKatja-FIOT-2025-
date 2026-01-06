@@ -835,3 +835,11 @@ select option:checked{
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+/* Fix: make ALL buttons use the same font */
+button.btn,
+.btn {
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
