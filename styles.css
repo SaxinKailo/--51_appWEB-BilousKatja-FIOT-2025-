@@ -550,6 +550,9 @@ select option:checked{
   display: block;
   object-fit: cover;      /* fills frame (cropping if needed) */
   object-position: center;
+
+  /* 🔑 zoom in slightly to hide plate rim */
+  transform: scale(1.08);
 }
 
 /* remove caption completely (in case it's still in HTML somewhere) */
