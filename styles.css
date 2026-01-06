@@ -843,3 +843,56 @@ button.btn,
   letter-spacing: 0.3px;
   text-transform: uppercase;
 }
+/* =========================================================
+   PLANNER PAGE — green buttons + green email + same sizing
+   ========================================================= */
+
+/* Make ALL buttons identical in font & size */
+.btn,
+button.btn {
+  font-family: inherit;
+  font-size: 16px;        /* same size everywhere */
+  font-weight: 800;
+  line-height: 1;
+  padding: 14px 22px;     /* same height */
+  border-radius: 999px;
+  text-transform: none;  /* remove browser differences */
+}
+
+/* Green neon buttons (planner page) */
+.page-planner .btn,
+.page-planner button.btn {
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+  color: #ecfdf5;
+  border: 1px solid rgba(34,197,94,.85);
+  box-shadow:
+    0 0 12px rgba(34,197,94,.8),
+    0 0 28px rgba(34,197,94,.6);
+}
+
+.page-planner .btn:hover {
+  box-shadow:
+    0 0 18px rgba(34,197,94,1),
+    0 0 40px rgba(34,197,94,.85);
+  transform: translateY(-1px);
+}
+
+/* Green email in footer */
+.page-planner .site-footer,
+.page-planner .site-footer a {
+  color: #86efac;
+  font-size: 16px;
+}
+
+.page-planner .site-footer a {
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(34,197,94,.6);
+}
+
+.page-planner .site-footer a:hover {
+  color: #bbf7d0;
+}
