@@ -564,9 +564,6 @@ select option:checked{
 
   /* 🔑 zoom in slightly to hide plate rim */
   transform: scale(1.18);
-  
-  webkit-mask-image: radial-gradient(circle at center, #000 62%, transparent 72%);
-  mask-image: radial-gradient(circle at center, #000 62%, transparent 72%);
 }
 
 /* remove caption completely (in case it's still in HTML somewhere) */
