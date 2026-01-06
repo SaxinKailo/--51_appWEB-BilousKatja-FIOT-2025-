@@ -328,13 +328,15 @@ h1{
   margin-bottom:12px;
 }
 
-input, textarea{
+input, textarea, button{
   background: rgba(255,255,255,.04);
   border:1px solid var(--line);
   color: var(--text);
   padding:10px 12px;
   border-radius:14px;
   outline:none;
+  font: inherit;        /* stronger than font-family alone */
+  line-height: 1;
 }
 
 input:focus, textarea:focus{
