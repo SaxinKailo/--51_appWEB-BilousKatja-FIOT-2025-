@@ -548,14 +548,6 @@ select option:checked{
   object-position: center;
   position: static;
 }
-.home-photo {
-  background: transparent;
-  padding: 0;
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-}
-
 .home-photo img{
 /* remove caption completely (in case it's still in HTML somewhere) */
 .photo-caption{ display:none !important; }
