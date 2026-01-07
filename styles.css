@@ -514,8 +514,8 @@ select option:checked{
 }
 
 /* --- HERO IMAGE НЕОНОВЕ СЯЙВО --- */
-.page-home.neon .home-photo,
-.page-home.neon .hero-image img {
+.page-home.neon .hero-image img,
+.page-home.neon .home-photo img {
   box-shadow:
     0 0 20px rgba(236,72,153,.8),
     0 0 50px rgba(168,85,247,.7),
@@ -541,13 +541,12 @@ select option:checked{
 }
 
 .home-photo img{
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;      /* fills frame (cropping if needed) */
+  object-fit: cover;
   object-position: center;
+  position: static;
 }
 
 /* remove caption completely (in case it's still in HTML somewhere) */
