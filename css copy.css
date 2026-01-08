@@ -1,0 +1,887 @@
+:root{
+  --bg:#0b0c10;
+  --card:#12141c;
+  --alt:#0f1118;
+  --text:#e9ecf1;
+  --muted:#b3b9c6;
+  --line:rgba(255,255,255,.12);
+
+  /* keep your original accents (not used for buttons anymore) */
+  --accent:#6ee7b7;
+  --accent2:#60a5fa;
+
+  /* unified button purple */
+  --purple:#7c5cff;
+
+  --danger:#fb7185;
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background:
+    radial-gradient(1200px 700px at 15% 10%, rgba(96,165,250,.18), transparent 55%),
+    radial-gradient(1100px 700px at 85% 5%, rgba(110,231,183,.14), transparent 55%),
+    var(--bg);
+  color:var(--text);
+  line-height:1.55;
+}
+
+a{ color:inherit; text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+.container{
+  width:min(1100px, 92vw);
+  margin:0 auto;
+}
+
+/* HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background: rgba(11,12,16,.72);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:14px 0;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+.brand-mark{ font-size:20px; }
+.brand-text{ font-size:16px; }
+
+.nav{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  font-weight:600;
+}
+.nav a{
+  padding:8px 10px;
+  border-radius:12px;
+}
+.nav a:hover{
+  background: rgba(255,255,255,.06);
+  text-decoration:none;
+}
+
+.menu-btn{ display:none; }
+
+/* MOBILE NAV (kept) */
+.mobile-nav{
+  display:grid;
+  gap:8px;
+  padding:10px 0 14px 0;
+}
+.mobile-nav a{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+.mobile-nav a:hover{ text-decoration:none; }
+
+/* HERO */
+.hero{
+  padding:46px 0 18px 0;
+}
+.hero-grid{
+  align-items:center;
+}
+.hero-image img{
+  width:100%;
+  height:400px;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+h1{
+  margin:0 0 10px 0;
+  font-size: clamp(28px, 3.4vw, 44px);
+  line-height:1.12;
+}
+
+.lead{
+  margin:0 0 16px 0;
+  color:var(--muted);
+  font-size: clamp(15px, 1.5vw, 18px);
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0 14px 0;
+}
+
+.hero-bullets{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
+}
+
+/* SECTIONS */
+.section{
+  padding:42px 0;
+}
+.section.alt{
+  background: linear-gradient(180deg, rgba(255,255,255,.03), transparent 45%);
+}
+
+.section-head{
+  margin-bottom:18px;
+}
+.section-head h2{
+  margin:0 0 6px 0;
+  font-size: clamp(20px, 2.4vw, 28px);
+}
+
+/* CARDS */
+.card{
+  border:1px solid var(--line);
+  background: rgba(18,20,28,.70);
+  border-radius:18px;
+  padding:16px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+.card-title{ margin:0 0 10px 0; }
+
+.muted{ color:var(--muted); }
+.small{ font-size: 13px; }
+
+/* MINI GRID (kept) */
+.mini-grid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.mini{
+  padding:10px;
+  border-radius:14px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+.mini-label{
+  display:block;
+  color:var(--muted);
+  font-size:12px;
+}
+.mini-value{
+  display:block;
+  font-weight:700;
+  margin-top:4px;
+}
+
+.note{
+  margin:12px 0 0 0;
+  padding:10px 12px;
+  border-radius:14px;
+  border:1px dashed rgba(110,231,183,.45);
+  background: rgba(110,231,183,.06);
+  color: var(--text);
+}
+
+/* GRIDS */
+.cards-3{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap:14px;
+}
+.grid-2{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:14px;
+}
+
+.list{
+  margin:10px 0 0 0;
+  padding-left:18px;
+}
+.list li{ margin:6px 0; }
+
+/* TABLE */
+.table-wrap{
+  overflow:auto;
+  border-radius:18px;
+  border:1px solid var(--line);
+}
+.planner{
+  width:100%;
+  border-collapse:collapse;
+  min-width: 640px;
+  background: rgba(255,255,255,.02);
+}
+.planner th, .planner td{
+  padding:12px 12px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+.planner th{
+  position:sticky;
+  top:0;
+  background: rgba(18,20,28,.95);
+  font-weight:800;
+}
+
+/* TIP */
+.tip{
+  margin-top:12px;
+  color:var(--muted);
+}
+.tip code{
+  padding:2px 6px;
+  border-radius:8px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.04);
+}
+
+/* CHECKLIST */
+.checklist h4{
+  margin:14px 0 8px 0;
+}
+.checklist label{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background: rgba(255,255,255,.03);
+  margin-bottom:8px;
+}
+.checklist input{ width:18px; height:18px; }
+
+.actions{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+
+/* =========================================================
+   BUTTONS — unified purple for ALL buttons/links with .btn
+   (keeps .btn-primary/.btn-secondary for compatibility,
+    but makes them look the same)
+   ========================================================= */
+.btn{
+  font-family: inherit;   /* ✅ ADD THIS */
+  font-size: 16px;        /* ✅ ADD THIS */
+
+  font-family: inherit;        /* ✅ однаковий шрифт */
+  font-size: 16px;             /* ✅ однаковий розмір тексту */
+  font-weight: 800;
+  line-height: 1;              /* ✅ однакова висота */
+  
+  border:1px solid rgba(124,92,255,.55);
+  padding:14px 22px;           /* ✅ однакова висота кнопки */
+  border-radius:999px;
+  cursor:pointer;
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  text-decoration:none;
+  color:#fff;
+  
+  background: linear-gradient(135deg, var(--purple), rgba(124,92,255,.85));
+  box-shadow: 0 10px 24px rgba(124,92,255,.35);
+  transition: transform .06s ease, box-shadow .12s ease, background .12s ease;
+}
+
+.btn:hover{
+  text-decoration:none;
+  background: linear-gradient(135deg, #6f4eff, rgba(124,92,255,.95));
+  box-shadow: 0 14px 30px rgba(124,92,255,.45);
+}
+
+.btn:active{
+  transform: translateY(1px);
+}
+
+/* keep classes but make them same */
+.btn-primary{ }
+.btn-secondary{ }
+
+/* =========================================================
+   FORMS + INPUTS
+   ========================================================= */
+.form .field{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  margin-bottom:12px;
+}
+
+input, textarea, button{
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color: var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  outline:none;
+  font: inherit;        /* stronger than font-family alone */
+  line-height: 1;
+}
+
+input:focus, textarea:focus{
+  border-color: rgba(124,92,255,.65);
+}
+
+/* =========================================================
+   SELECT FIX (your exact problem)
+   ========================================================= */
+
+/* Keep select field dark like the site */
+select{
+  background: rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color: var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  outline:none;
+
+  /* This is key: it forces the browser to render dropdown
+     with a light scheme on many systems, preventing white-on-white */
+  color-scheme: light;
+}
+
+/* Force readable options (works in many browsers) */
+select option{
+  background: #ffffff;
+  color: #111111;
+}
+
+/* some browsers use optgroup too */
+select optgroup{
+  background:#ffffff;
+  color:#111111;
+}
+
+/* If a browser supports it, make the chosen option clear */
+select option:checked{
+  background: #e9e3ff;
+  color: #111111;
+}
+
+/* NOTES block (kept) */
+.note-row{
+  display:flex;
+  gap:10px;
+}
+.notes{
+  margin:12px 0 0 0;
+  padding-left:18px;
+  color: var(--muted);
+}
+.notes li{
+  margin:6px 0;
+}
+
+/* FOOTER */
+.site-footer{
+  border-top:1px solid var(--line);
+  padding:18px 0;
+  background: rgba(0,0,0,.2);
+}
+.footer-row{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+/* SR ONLY */
+.sr-only{
+  position:absolute;
+  width:1px;height:1px;
+  padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);
+  border:0;
+}
+
+/* Responsive */
+@media (max-width: 860px){
+  .hero-grid{ grid-template-columns: 1fr; }
+  .cards-3{ grid-template-columns: 1fr; }
+  .grid-2{ grid-template-columns: 1fr; }
+  .nav{ display:none; }
+  .menu-btn{ display:inline-flex; }
+}
+/* =========================================================
+   NEON HOME PAGE 🔥💜💗
+   ========================================================= */
+
+.page-home.neon {
+  color: #e9d5ff;
+}
+
+/* --- НЕОНОВІ ЗАГОЛОВКИ --- */
+.page-home.neon h1,
+.page-home.neon h2,
+.page-home.neon h3 {
+  color: #c084fc;
+  text-shadow:
+    0 0 6px rgba(192,132,252,.8),
+    0 0 14px rgba(168,85,247,.7),
+    0 0 30px rgba(168,85,247,.5);
+}
+
+/* --- НЕОНОВИЙ ТЕКСТ --- */
+.page-home.neon p,
+.page-home.neon li,
+.page-home.neon .lead {
+  color: #f5d0fe;
+}
+
+/* --- НЕОНОВІ РОЖЕВІ ВІКОНЦЯ --- */
+.page-home.neon .card,
+.page-home.neon .home-card,
+.page-home.neon .mini,
+.page-home.neon .feature {
+  background: radial-gradient(
+      circle at top left,
+      rgba(236,72,153,.45),
+      rgba(168,85,247,.25) 60%,
+      rgba(18,20,28,.9)
+  );
+  border: 1px solid rgba(236,72,153,.75);
+  box-shadow:
+    0 0 12px rgba(236,72,153,.65),
+    0 0 28px rgba(168,85,247,.55),
+    inset 0 0 18px rgba(236,72,153,.35);
+  color: #fdf4ff;
+}
+
+/* --- НЕОНОВІ БЕЙДЖІ / МІНІ-БЛОКИ --- */
+.page-home.neon .badge,
+.page-home.neon .mini {
+  background: rgba(236,72,153,.25);
+  border-color: rgba(236,72,153,.8);
+  color: #fdf4ff;
+  box-shadow:
+    0 0 10px rgba(236,72,153,.6);
+}
+
+/* --- НЕОНОВІ КНОПКИ --- */
+.page-home.neon .btn {
+  background: linear-gradient(
+    135deg,
+    #ec4899,
+    #a855f7,
+    #6366f1
+  );
+  border: 1px solid rgba(236,72,153,.9);
+  color: #fff;
+  box-shadow:
+    0 0 12px rgba(236,72,153,.9),
+    0 0 28px rgba(168,85,247,.7),
+    0 0 48px rgba(99,102,241,.6);
+  text-shadow: 0 0 6px rgba(255,255,255,.8);
+}
+
+.page-home.neon .btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow:
+    0 0 18px rgba(236,72,153,1),
+    0 0 36px rgba(168,85,247,.9),
+    0 0 64px rgba(99,102,241,.8);
+}
+
+/* --- НЕОНОВІ ПОСИЛАННЯ --- */
+.page-home.neon a {
+  color: #f0abfc;
+  text-shadow: 0 0 8px rgba(236,72,153,.8);
+}
+
+.page-home.neon a:hover {
+  color: #fdf4ff;
+}
+
+/* --- HERO IMAGE НЕОНОВЕ СЯЙВО --- */
+.page-home.neon .hero-image img,
+.page-home.neon .home-photo img {
+  box-shadow:
+    0 0 20px rgba(236,72,153,.8),
+    0 0 50px rgba(168,85,247,.7),
+    0 0 90px rgba(99,102,241,.6);
+}
+
+/* --- НЕОНОВИЙ ГЛОУ ДЛЯ ВСЬОГО HERO --- */
+.page-home.neon .hero,
+.page-home.neon .home-hero {
+  position: relative;
+}
+
+.page-home.neon .hero::after,
+.page-home.neon .home-hero::after {
+  content:"";
+  position:absolute;
+  inset:-40px;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(236,72,153,.25), transparent 55%),
+    radial-gradient(circle at 70% 30%, rgba(168,85,247,.25), transparent 60%);
+  pointer-events:none;
+  z-index:-1;
+}
+
+.home-photo img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  position: static;
+}
+
+/* remove caption completely (in case it's still in HTML somewhere) */
+.photo-caption{ display:none !important; }
+
+/* =========================================================
+   PLANNER PAGE — neon green theme + photo frame + aligned rows
+   ========================================================= */
+
+.page-planner.neon-green body {}
+
+/* Неоново-зелений фон з градієнтом тільки на planner */
+.page-planner.neon-green {
+  background:
+    radial-gradient(1200px 700px at 10% 10%, rgba(34,197,94,.30), transparent 55%),
+    radial-gradient(1100px 700px at 90% 15%, rgba(132,204,22,.22), transparent 55%),
+    radial-gradient(900px 600px at 50% 90%, rgba(16,185,129,.18), transparent 55%),
+    #070a0b;
+}
+
+/* Зелена назва застосунку + навігація тільки на planner */
+.page-planner.neon-green .brand,
+.page-planner.neon-green .nav a{
+  color: #86efac; /* neon green text */
+  text-shadow:
+    0 0 8px rgba(34,197,94,.75),
+    0 0 18px rgba(132,204,22,.45);
+}
+
+.page-planner.neon-green .nav a:hover{
+  background: rgba(34,197,94,.14);
+  text-decoration: none;
+  box-shadow: 0 0 16px rgba(34,197,94,.25);
+}
+
+/* Рамка планера повністю "фото" + оверлей для читабельності */
+.page-planner.neon-green .planner-frame{
+  position: relative;
+  overflow: hidden;
+
+  /* Постав свій шлях до картинки (приклад) */
+  background-image: url("images/planner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border: 1px solid rgba(34,197,94,.55);
+  box-shadow:
+    0 0 14px rgba(34,197,94,.55),
+    0 0 34px rgba(132,204,22,.30);
+}
+
+/* Темний прозорий шар поверх фото, щоб текст читався */
+.page-planner.neon-green .planner-frame::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(7,10,11,.62);
+  pointer-events:none;
+}
+
+/* Контент поверх оверлея */
+.page-planner.neon-green #plannerGrid{
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Рядок: день + обід + вечеря в ОДИН РЯДОК --- */
+.page-planner.neon-green .planner-row{
+  display: grid;
+  grid-template-columns: 70px 1fr 1fr; /* день | обід | вечеря */
+  gap: 12px;
+  align-items: center; /* вертикально по центру */
+  padding: 10px 10px;
+  border-radius: 14px;
+  border: 1px solid rgba(34,197,94,.25);
+  background: rgba(0,0,0,.18);
+  margin-bottom: 10px;
+}
+
+/* День тижня */
+.page-planner.neon-green .planner-row > div:first-child{
+  font-weight: 900;
+  color: #86efac;
+  text-shadow: 0 0 10px rgba(34,197,94,.55);
+}
+
+/* Прибираємо margin-top, який ти задавала inline (в render()) */
+.page-planner.neon-green .planner-row > div:nth-child(2){
+  margin-top: 0 !important;
+  display: grid;
+  grid-template-columns: 54px 1fr 70px 1fr; /* "Обід" + select + "Вечеря" + select */
+  gap: 10px;
+  align-items: center; /* все по центру */
+}
+
+/* Підписи "Обід/Вечеря" */
+.page-planner.neon-green .planner-row .muted{
+  color: rgba(167,243,208,.85);
+  font-weight: 700;
+}
+
+/* Селекти по центру і в неоново-зеленому стилі */
+.page-planner.neon-green select{
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(34,197,94,.55);
+  color: #eafff2;
+  border-radius: 14px;
+
+  box-shadow: 0 0 10px rgba(34,197,94,.20);
+  outline: none;
+}
+
+/* Edge dropdown: опції читабельні */
+.page-planner.neon-green select option,
+.page-planner.neon-green select optgroup{
+  background: #06110a;
+  color: #eafff2;
+}
+
+/* Трохи "глоу" на фокусі */
+.page-planner.neon-green select:focus{
+  border-color: rgba(34,197,94,.95);
+  box-shadow:
+    0 0 0 3px rgba(34,197,94,.18),
+    0 0 18px rgba(34,197,94,.35);
+}
+
+/* На мобілках — щоб не ламалось */
+@media (max-width: 860px){
+  .page-planner.neon-green .planner-row{
+    grid-template-columns: 60px 1fr;
+  }
+  .page-planner.neon-green .planner-row > div:nth-child(2){
+    grid-template-columns: 54px 1fr;
+    row-gap: 10px;
+  }
+}
+/* =========================================
+   SHOPPING PAGE — full page background image
+   ========================================= */
+
+.page-shopping{
+  min-height: 100vh;
+
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,.55),
+      rgba(0,0,0,.55)
+    ),
+    url("images/shopping.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   SHOPPING PAGE — Neon Orange Theme 🔥🟠
+   ========================================================= */
+
+.page-shopping.neon-orange {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,140,0,.28), transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(255,165,0,.22), transparent 65%),
+    var(--bg);
+  color: #ffcb8e;
+}
+
+/* Neon orange nav + brand */
+.page-shopping.neon-orange .brand,
+.page-shopping.neon-orange .nav a {
+  color: #ff8c00; /* bright orange */
+  text-shadow:
+    0 0 8px rgba(255,140,0,.75),
+    0 0 14px rgba(255,165,0,.55);
+}
+
+.page-shopping.neon-orange .nav a:hover {
+  background: rgba(255,140,0,.12);
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(255,140,0,.30);
+}
+
+/* Cards & checklist items neon glow */
+.page-shopping.neon-orange .card,
+.page-shopping.neon-orange .checklist label {
+  background: radial-gradient(
+      circle at top left,
+      rgba(255,165,0,.45),
+      rgba(255,140,0,.25) 60%,
+      rgba(18,20,28,.9)
+    );
+  border: 1px solid rgba(255,140,0,.70);
+  box-shadow:
+    0 0 12px rgba(255,140,0,.65),
+    0 0 26px rgba(255,165,0,.45),
+    inset 0 0 18px rgba(255,140,0,.35);
+  color: #fff5eb;
+}
+
+/* Buttons neon orange */
+.page-shopping.neon-orange .btn {
+  background: linear-gradient(
+    135deg,
+    #ff8c00,
+    #ff7f50,
+    #ffa500
+  );
+  border-color: rgba(255,140,0,.85);
+  color: #fff;
+  box-shadow:
+    0 0 12px rgba(255,140,0,.9),
+    0 0 28px rgba(255,165,0,.7),
+    0 0 48px rgba(255,140,0,.6);
+  text-shadow: 0 0 6px rgba(255,255,255,.8);
+}
+
+.page-shopping.neon-orange .btn:hover {
+  background: linear-gradient(
+    135deg,
+    #ff7f50,
+    #ffa500,
+    #ff4500
+  );
+  box-shadow:
+    0 0 18px rgba(255,140,0,1),
+    0 0 36px rgba(255,165,0,.9),
+    0 0 64px rgba(255,140,0,.8);
+}
+
+/* Checklist labels (checkbox text) */
+.page-shopping.neon-orange .checklist label {
+  color: #ffe9cc;
+}
+
+/* Shopping list text items */
+.page-shopping.neon-orange #shoppingList div {
+  color: #ffd8a8;
+  text-shadow: 0 0 6px rgba(255,140,0,.45);
+}
+
+/* Muted text subtle neon accent */
+.page-shopping.neon-orange .muted {
+  color: #ffb366;
+}
+
+/* Email button special glow */
+.page-shopping.neon-orange #emailBtn {
+  
+}
+
+/* Scrollbar (optional neon orange) */
+.page-shopping.neon-orange ::-webkit-scrollbar {
+  width: 10px;
+}
+.page-shopping.neon-orange ::-webkit-scrollbar-track {
+  background: rgba(0,0,0,.2);
+}
+.page-shopping.neon-orange ::-webkit-scrollbar-thumb {
+  background: rgba(255,140,0,.75);
+  border-radius: 8px;
+}
+/* SHOPPING — neon orange + photo background (full page) */
+.page-shopping.neon-orange{
+  min-height: 100vh;
+
+  /* gradients ON TOP of the photo */
+  background:
+    radial-gradient(circle at 10% 10%, rgba(255,140,0,.30), transparent 55%),
+    radial-gradient(circle at 90% 15%, rgba(255,165,0,.22), transparent 65%),
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("images/shopping.jpg"); /* <-- change to your filename */
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* =========================================================
+   PLANNER PAGE — green buttons + green email + same sizing
+   ========================================================= */
+
+/* Make ALL buttons identical in font & size */
+.btn,
+button.btn {
+  font-family: inherit;
+  font-size: 16px;        /* same size everywhere */
+  font-weight: 800;
+  line-height: 1;
+  padding: 14px 22px;     /* same height */
+  border-radius: 999px;
+  text-transform: none;  /* remove browser differences */
+}
+
+/* Green neon buttons (planner page) */
+.page-planner .btn,
+.page-planner button.btn {
+  background: linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a
+  );
+  color: #ecfdf5;
+  border: 1px solid rgba(34,197,94,.85);
+  box-shadow:
+    0 0 12px rgba(34,197,94,.8),
+    0 0 28px rgba(34,197,94,.6);
+}
+
+.page-planner .btn:hover {
+  box-shadow:
+    0 0 18px rgba(34,197,94,1),
+    0 0 40px rgba(34,197,94,.85);
+  transform: translateY(-1px);
+}
+
+/* Green email in footer */
+.page-planner .site-footer,
+.page-planner .site-footer a {
+  color: #86efac;
+  font-size: 16px;
+}
+
+.page-planner .site-footer a {
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(34,197,94,.6);
+}
+
+.page-planner .site-footer a:hover {
+  color: #bbf7d0;
+}  
