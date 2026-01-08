@@ -6,17 +6,19 @@
   <title>MealPrep Buddy — Головна</title>
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Page-only styles (won't affect planner/shopping) -->
   <style>
     .home-hero {
       padding: 48px 0;
     }
+
     .home-wrap {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 28px;
       align-items: center;
     }
+
+    /* 🔹 CARD — еталон формату */
     .home-card {
       background: rgba(255,255,255,0.9);
       border: 1px solid rgba(0,0,0,0.06);
@@ -24,29 +26,34 @@
       padding: 22px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.06);
     }
+
     .home-title {
       font-size: 40px;
       line-height: 1.1;
       margin: 0 0 10px 0;
       letter-spacing: -0.02em;
     }
+
     .home-sub {
       font-size: 16px;
       margin: 0 0 18px 0;
       opacity: 0.85;
     }
+
     .home-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
       margin-top: 14px;
     }
+
     .home-badges {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
       margin-top: 16px;
     }
+
     .badge {
       font-size: 13px;
       padding: 8px 10px;
@@ -55,28 +62,32 @@
       background: rgba(255,255,255,0.7);
     }
 
+    /* 🔹 PHOTO — ТА САМА РАМКА, ІНШИЙ РОЗМІР */
     .home-photo {
-      border-radius: 18px;
-      overflow: hidden;
+      background: rgba(255,255,255,0.9);
       border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 14px 40px rgba(0,0,0,0.10);
-      height: 340px;
-      background: #f3f3f3;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+
+      height: 340px;            /* ← свій розмір */
+      overflow: hidden;
       position: relative;
     }
+
     .home-photo img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: cover;
+      display: block;
     }
-    
+
     .home-features {
       margin-top: 18px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
     }
+
     .feature {
       padding: 12px;
       border-radius: 14px;
@@ -84,29 +95,36 @@
       background: rgba(255,255,255,0.75);
       font-size: 14px;
     }
-    .feature strong { display: block; margin-bottom: 4px; }
 
-    .home-note {
-      margin-top: 14px;
-      font-size: 13px;
-      opacity: 0.75;
+    .feature strong {
+      display: block;
+      margin-bottom: 4px;
     }
 
     @media (max-width: 900px) {
-      .home-wrap { grid-template-columns: 1fr; }
-      .home-title { font-size: 34px; }
-      .home-features { grid-template-columns: 1fr; }
-      .home-photo { min-height: 260px; }
+      .home-wrap {
+        grid-template-columns: 1fr;
+      }
+      .home-title {
+        font-size: 34px;
+      }
+      .home-features {
+        grid-template-columns: 1fr;
+      }
+      .home-photo {
+        height: 260px;
+      }
     }
   </style>
 </head>
+
 <body class="page-home neon">
 
 <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href="./" aria-label="Головна">🍲 MealPrep Buddy!</a>
-    <nav class="nav" aria-label="Навігація">
-      <a href="./" aria-current="page">Головна</a>
+    <a class="brand" href="index.html">🍲 MealPrep Buddy</a>
+    <nav class="nav">
+      <a href="index.html" aria-current="page">Головна</a>
       <a href="planner.html">План тижня</a>
       <a href="shopping.html">Список покупок</a>
     </nav>
@@ -117,6 +135,8 @@
   <section class="home-hero">
     <div class="container">
       <div class="home-wrap">
+
+        <!-- TEXT CARD -->
         <div class="home-card">
           <h1 class="home-title">Плануй харчування на тиждень легко</h1>
           <p class="home-sub">
@@ -148,17 +168,13 @@
               Позначай «вже є» та надсилай список.
             </div>
           </div>
-
-          <div class="home-note">
-
-          </div>
         </div>
 
-        <div class="home-photo" aria-label="Фото про планування харчування">
-          <!-- ✅ Варіант 1: поклади файл hero.jpg в корінь репозиторію поруч із index.html -->
+        <!-- PHOTO CARD -->
+        <div class="home-photo">
           <img src="images/hero.jpg" alt="Їжа та планування покупок">
-    
         </div>
+
       </div>
     </div>
   </section>
