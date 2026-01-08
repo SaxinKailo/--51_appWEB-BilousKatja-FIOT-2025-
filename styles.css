@@ -514,15 +514,6 @@ select option:checked{
   color: #fdf4ff;
 }
 
-/* --- HERO IMAGE НЕОНОВЕ СЯЙВО --- */
-.page-home.neon .hero-image img,
-.page-home.neon .home-photo img {
-  box-shadow:
-    0 0 20px rgba(236,72,153,.8),
-    0 0 50px rgba(168,85,247,.7),
-    0 0 90px rgba(99,102,241,.6);
-}
-
 /* --- НЕОНОВИЙ ГЛОУ ДЛЯ ВСЬОГО HERO --- */
 .page-home.neon .hero,
 .page-home.neon .home-hero {
@@ -539,15 +530,6 @@ select option:checked{
     radial-gradient(circle at 70% 30%, rgba(168,85,247,.25), transparent 60%);
   pointer-events:none;
   z-index:-1;
-}
-
-.home-photo img{
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center;
-  position: static;
 }
 
 /* remove caption completely (in case it's still in HTML somewhere) */
