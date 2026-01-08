@@ -452,6 +452,7 @@ select option:checked{
 /* --- НЕОНОВІ РОЖЕВІ ВІКОНЦЯ --- */
 .page-home.neon .card,
 .page-home.neon .home-card,
+.page-home.neon .home-photo,
 .page-home.neon .mini,
 .page-home.neon .feature {
   background: radial-gradient(
