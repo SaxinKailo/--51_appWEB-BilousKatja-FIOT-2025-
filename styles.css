@@ -107,9 +107,9 @@ a:hover{ text-decoration:underline; }
 }
 .hero-image img{
   width:100%;
-  height:500px;
+  height:400px;
   object-fit:cover;
-  border-radius:0px;
+  border-radius:16px;
   box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
@@ -451,7 +451,6 @@ select option:checked{
 
 /* --- НЕОНОВІ РОЖЕВІ ВІКОНЦЯ --- */
 .page-home.neon .card,
-.page-home.neon .page-home.neon .card,
 .page-home.neon .home-card,
 .page-home.neon .mini,
 .page-home.neon .feature {
@@ -549,7 +548,7 @@ select option:checked{
   object-position: center;
   position: static;
 }
-.home-photo img{
+
 /* remove caption completely (in case it's still in HTML somewhere) */
 .photo-caption{ display:none !important; }
 
